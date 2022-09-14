@@ -1,0 +1,38 @@
+package com.neusoft.elm.util;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+public class DBUtil {
+	
+	private static final String URL = "jdbc:mysql://localhost:3306/elm?characterEncoding=utf-8";
+	private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
+	private static final String USERNAME = "root";
+	private static final String PASSWORD = "admin";
+	
+	private static final ThreadLocal<Connection> TL = new ThreadLocal<>();
+	
+	//ªÒ»°Connection
+	public static Connection getConnection() {
+		Connection con = null;
+		con = TL.get();
+		if(con == null) {
+			con = createConnection();
+			TL.set(con);
+		}
+	}
+	
+	private static Connection createConnection() {
+		Connection con = null;
+		if(con == null) {
+			try {
+				Class.forName(DRIVER);
+				con = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return con;
+	}
+}
