@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
+import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 
@@ -15,11 +15,13 @@ import {
 	removeLocalStorage
 } from './common.js'
 
+
+Vue.config.productionTip = false
+
 // 设置axios的基础url部分
 axios.default.baseURL = 'http://localhost:8080/elm/';
 // 将axios挂载到vue实例上，使用时可以this.$axios 
 Vue.prototype.$axios = axios;
-
 Vue.prototype.$qs = qs;
 
 Vue.prototype.$getCurDate = getCurDate;
@@ -42,4 +44,7 @@ router.beforeEach(function(to,from,next){
 	next();
 });
 
-createApp(App).use(router).mount('#app')
+new Vue({
+  router,
+  render: h => h(App)
+}).$mount('#app')

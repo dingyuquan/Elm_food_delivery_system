@@ -1,16 +1,19 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import Index from '../views/index.vue'
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import Index from '../views/Index.vue'
+
+Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
+    name: 'home',
     component: Index
   },
   {
-	path: '/',
-	name: 'Index',
-	component: Index
+    path: '/index',
+    name: 'home',
+    component: Index
   }
 ]
 
@@ -20,8 +23,9 @@ VueRouter.prototype.push = function push(location) {
 	return originalPush.call(this, location).catch(err => err)
 }
 
-const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+const router = new VueRouter({
+  mode: 'history',
+  base: process.env.BASE_URL,
   routes
 })
 
