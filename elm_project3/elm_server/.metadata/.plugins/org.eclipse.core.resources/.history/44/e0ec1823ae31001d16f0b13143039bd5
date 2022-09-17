@@ -1,7 +1,0 @@
-package com.neusoft.elm.controller;
-
-public class UserController {
-	public void login() {
-		System.out.println("do login");
-	}
-}
