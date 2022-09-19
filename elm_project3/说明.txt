@@ -1,0 +1,10 @@
+韩宝骏：
+1. 直接吧elm_server文件导入sts即可，本地有servers文件夹的，而且gitee上传的的elm_server里没有servers
+2. 往gitee上传elm_server不用带着servers文件夹
+3. 导入elm_server文件后记得修改/src/.../util/DBUtil里的password常量，其值应为本地mysql root账户的密码 
+4. vue报错“‘vue-cli-service‘不是内部或外部命令，也不是...”时，可以尝试如下方法：
+	（1）删除elm_client内的node_module文件夹
+	（2）打开终端运行：npm install
+	（3）终端：npm run serve
+即注意在项目拷贝或git时，要省略掉node_module
+5. vue启动时出错，可以尝试检查elm_client下/src/router/index.js文件里，开头的import Index from '../views/index.vue'与对应位置的文件index.vue大小写是否一致。
