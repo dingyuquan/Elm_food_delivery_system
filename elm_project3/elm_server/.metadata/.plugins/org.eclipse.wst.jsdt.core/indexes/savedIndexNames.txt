@@ -1,7 +1,0 @@
-INDEX VERSION 1.4+D:\elm_project\hungry\elm_project3\elm_server\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-663646972.index
-348675971.index
-2880367423.index
-3510483903.index
-2904166733.index
-1187376439.index
