@@ -11,8 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.neusoft.elm.controller.FoodController;
-import com.neusoft.elm.controller.UserController;
 
 @WebServlet("/")
 public class DispatcherServlet extends HttpServlet{
