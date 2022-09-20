@@ -26,7 +26,7 @@ public class OrdersDaoImpl implements OrdersDao{
 			pst.setDouble(4, orders.getOrderTotal());
 			pst.setInt(5, orders.getDaId());
 			pst.executeUpdate();
-			//鑾峰彇鑷闀垮垪鍊硷紙涓�琛屼竴鍒楋級
+			//获取自增长列值（一行一列）
 			rs = pst.getGeneratedKeys();
 			if(rs.next()) {
 				orderId = rs.getInt(1);

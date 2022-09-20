@@ -22,7 +22,7 @@ public class OrderDetailetDaoImpl implements OrderDetailetDao{
 		for(OrderDetailet od : list) {
 			stringBuffer.append("("+od.getOrderId()+","+od.getFoodId()+","+od.getQuantity()+"),");
 		}
-		//鍘绘帀sql涓渶鍚庝竴涓�楀彿
+		//去掉sql中最后一个逗号
 		String sql = stringBuffer.toString().substring(0, stringBuffer.toString().length()-1);
 		try {
 			con = DBUtil.getConnection();

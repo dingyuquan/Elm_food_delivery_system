@@ -11,23 +11,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.neusoft.elm.controller.FoodController;
-import com.neusoft.elm.controller.UserController;
 
 @WebServlet("/")
 public class DispatcherServlet extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		//ä¸­æ–‡ç¼–ç å¤„ç†
+		//ÖĞÎÄ±àÂë´¦Àí
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("application/json;charset=utf-8");
 		
-		//è·å–å®¢æˆ·ç«¯è¯·æ±‚è·¯å¾„
+		//»ñÈ¡¿Í»§¶ËÇëÇóÂ·¾¶
 		String path = request.getServletPath();
 		
-		//æ ¹æ®è¯·æ±‚è·¯å¾„å°†controllerç»„ä»¶ç±»åä¸æ–¹æ³•è§£æ
+		//¸ù¾İÇëÇóÂ·¾¶½«controller×é¼şÀàÃûÓë·½·¨½âÎö
 		String className = path.substring(1, path.lastIndexOf("/"));
 		String methodName = path.substring(path.lastIndexOf("/")+1);
 		//System.out.println(className);
@@ -48,8 +46,8 @@ public class DispatcherServlet extends HttpServlet{
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("DispatcherServletä¿¡æ¯ï¼šServletè¯·æ±‚è·¯å¾„ï¼š" + path);
-			System.out.println("DispatcherServletä¿¡æ¯ï¼šç±»å" + className + "\tæ–¹æ³•åï¼š" + methodName);
+			System.out.println("DispatcherServletĞÅÏ¢£ºServletÇëÇóÂ·¾¶£º" + path);
+			System.out.println("DispatcherServletĞÅÏ¢£ºÀàÃû" + className + "\t·½·¨Ãû£º" + methodName);
 
 		} finally {
 			out.close();

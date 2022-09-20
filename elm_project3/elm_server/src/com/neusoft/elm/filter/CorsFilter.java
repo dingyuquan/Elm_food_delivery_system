@@ -10,8 +10,10 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletResponse;
 
+
 @WebFilter("/*")
 public class CorsFilter implements Filter {
+
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
 	}
@@ -20,7 +22,7 @@ public class CorsFilter implements Filter {
 	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
 			throws IOException, ServletException {
 		HttpServletResponse response = (HttpServletResponse) servletResponse;
-		// 娉ㄦ剰锛氳繖閲岃缃彧鍏佽http://localhost:8081杩涜璺ㄥ煙璁块棶
+		// 注意：这里设置只允许http://localhost:8081进行跨域访问
 		response.setHeader("Access-Control-Allow-Origin", "http://localhost:8081");
 		response.setHeader("Access-Control-Allow-Credentials", "true");
 		response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PUT");
