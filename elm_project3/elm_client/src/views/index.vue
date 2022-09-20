@@ -19,43 +19,43 @@
 
 		<!-- 点餐分类部分 -->
 		<ul class="foodtype">
-			<li @click="businessList(1)">
+			<li @click="toBusinessList(1)">
 				<img src="../assets/dcfl01.png">
 				<p>美食</p>
 			</li>
-			<li @click="businessList(2)">
+			<li @click="toBusinessList(2)">
 				<img src="../assets/dcfl02.png">
 				<p>早餐</p>
 			</li>
-			<li @click="businessList(3)">
+			<li @click="toBusinessList(3)">
 				<img src="../assets/dcfl03.png">
 				<p>跑腿代购</p>
 			</li>
-			<li @click="businessList(4)">
+			<li @click="toBusinessList(4)">
 				<img src="../assets/dcfl04.png">
 				<p>汉堡披萨</p>
 			</li>
-			<li @click="businessList(5)">
+			<li @click="toBusinessList(5)">
 				<img src="../assets/dcfl05.png">
 				<p>甜品饮品</p>
 			</li>
-			<li @click="businessList(6)">
+			<li @click="toBusinessList(6)">
 				<img src="../assets/dcfl06.png">
 				<p>素食简餐</p>
 			</li>
-			<li @click="businessList(7)">
+			<li @click="toBusinessList(7)">
 				<img src="../assets/dcfl07.png">
 				<p>地方小吃</p>
 			</li>
-			<li @click="businessList(8)">
+			<li @click="toBusinessList(8)">
 				<img src="../assets/dcfl08.png">
 				<p>米粉面馆</p>
 			</li>
-			<li @click="businessList(9)">
+			<li @click="toBusinessList(9)">
 				<img src="../assets/dcfl09.png">
 				<p>包子粥铺</p>
 			</li>
-			<li @click="businessList(10)">
+			<li @click="toBusinessList(10)">
 				<img src="../assets/dcfl10.png">
 				<p>炸鸡炸串</p>
 			</li>
@@ -88,7 +88,7 @@
 		</div>
 
 		<!-- 推荐方式部分 -->
-		<ul class="recoommendtype">
+		<ul class="recommendtype">
 			<li>综合排序<i class="fa fa-caret-down"></i></li>
 			<li>距离最近</li>
 			<li>销量最高</li>
@@ -446,7 +446,7 @@
 	}
 
 	/********************* 推荐方式 *************************/
-	.wrapper .recoommendtype {
+	.wrapper .recommendtype {
 		width: 100%;
 		height: 5vw;
 		margin-bottom: 5vw;
@@ -456,7 +456,7 @@
 		align-items: center;
 	}
 
-	.wrapper .recoommendtype li {
+	.wrapper .recommendtype li {
 		font-size: 3.5vw;
 		color: #555;
 	}

@@ -3,6 +3,8 @@ package com.neusoft.elm.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import com.neusoft.elm.po.User;
+import com.neusoft.elm.service.UserService;
+import com.neusoft.elm.service.impl.UserServiceImpl;
 
 public class UserController {
 	

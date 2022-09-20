@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Index from '../views/Index.vue'
+import BusinessList from '../views/BusinessList.vue'
+import BusinessInfo from '../views/BusinessInfo.vue'
+import Login from '../views/Login.vue'
 
 Vue.use(VueRouter)
 
@@ -14,6 +17,21 @@ const routes = [
     path: '/index',
     name: 'home',
     component: Index
+  },
+  {
+	path: '/businessList',
+    name: 'BusinessList',
+    component: BusinessList
+  },
+  {
+    path: '/businessInfo',
+    name: 'BusinessInfo',
+    component: BusinessInfo
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
   }
 ]
 
