@@ -8,3 +8,39 @@
 	（3）终端：npm run serve
 即注意在项目拷贝或git时，要省略掉node_module
 5. vue启动时出错，可以尝试检查elm_client下/src/router/index.js文件里，开头的import Index from '../views/index.vue'与对应位置的文件index.vue大小写是否一致。
+6. 项目三的第三部分已做完，但在前两部分做完之前，项目可能一直无法运行，因此可能无法测试。
+7. 项目三的第三部分进行的所有工作：
+	（1）前端 src/router/index.js
+	头中添加UserAddress
+	（2）前端 src/views/UserAddress.vue（做得不标准）
+	新建
+	
+	（3）后端 service包
+	OrdersService.java
+	（4）后端 service.impl
+	OrdersServiceImpl.java
+	（5）后端 dao包
+	OrdersDao.java
+	（6）后端 dao.impl
+	OrdersDaoImpl.java
+	（7）后端 util.CommonUtil.java
+	（8）后端 dao包
+	OrderDetailetDao.java
+	（9）后端 dao.impl
+	OrderDetailetDaoImpl.java
+	（10）后端 controller
+	OrdersController.java
+	
+	（11）前端 src/views/Payment.vue
+	新建
+	头中添加Payment
+	（12）前端 src/components/Footer.vue中
+	第三行去除一层div
+	第三行添加@click
+	第20行修改export default
+
+
+
+
+
+
