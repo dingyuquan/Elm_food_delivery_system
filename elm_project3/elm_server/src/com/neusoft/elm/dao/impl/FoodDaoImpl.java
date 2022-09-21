@@ -1,4 +1,4 @@
-package com.neusoft.elm.dao;
+package com.neusoft.elm.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.neusoft.elm.dao.FoodDao;
 import com.neusoft.elm.po.Food;
 import com.neusoft.elm.util.DBUtil;
 
