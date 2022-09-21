@@ -25,15 +25,15 @@ public class OrdersServiceImpl implements OrdersService{
 		OrderDetailetDao orderDetailetDao = new OrderDetailetDaoImpl();
 		
 		try {
-			DBUtil.beginTransaction();  //¿ªÆôÒ»¸öÊÂÎñ
+			DBUtil.beginTransaction();  //å¼€å¯ä¸€ä¸ªäº‹åŠ¡
 			
-			//1¡¢²éÑ¯µ±Ç°ÓÃ»§¹ºÎï³µÖĞµÄµ±Ç°ÉÌ¼ÒµÄËùÓĞÉÌÆ·£¨Ä¿µÄÊÇ·ÅÈë¶©µ¥Ã÷Ï¸ÖĞ£©
+			//1ã€æŸ¥è¯¢å½“å‰ç”¨æˆ·è´­ç‰©è½¦ä¸­çš„å½“å‰å•†å®¶çš„æ‰€æœ‰å•†å“ï¼ˆç›®çš„æ˜¯æ”¾å…¥è®¢å•æ˜ç»†ä¸­ï¼‰
 			Cart cart = new Cart();
 			cart.setUserId(userId);
 			cart.setBusinessId(businessId);
 			List<Cart> cartList = cartDao.listCart(cart);
 			
-			//2¡¢´´½¨¶©µ¥£¬²¢»ñÈ¡¶©µ¥±àºÅ
+			//2ã€åˆ›å»ºè®¢å•ï¼Œå¹¶è·å–è®¢å•ç¼–å·
 			Orders orders = new Orders();
 			orders.setUserId(userId);
 			orders.setBusinessId(businessId);
@@ -41,7 +41,7 @@ public class OrdersServiceImpl implements OrdersService{
 			orders.setOrderTotal(orderTotal);
 			orderId = ordersDao.saveOrders(orders);
 			
-			//3¡¢Ïò¶©µ¥Ã÷Ï¸±íÖĞÅúÁ¿Ìí¼ÓÃ÷Ï¸Êı¾İ
+			//3ã€å‘è®¢å•æ˜ç»†è¡¨ä¸­æ‰¹é‡æ·»åŠ æ˜ç»†æ•°æ®
 			List<OrderDetailet> orderDetailetList = new ArrayList();
 			for(Cart c : cartList) {
 				OrderDetailet od = new OrderDetailet();
@@ -51,7 +51,7 @@ public class OrdersServiceImpl implements OrdersService{
 				orderDetailetList.add(od);
 			}
 			orderDetailetDao.saveOrderDetailetBatch(orderDetailetList);
-			//4¡¢Çå¿Õ¹ºÎï³µ£¨Ìõ¼ş£ºµ±Ç°ÓÃ»§£¬µ±Ç°ÉÌ¼Ò£©
+			//4ã€æ¸…ç©ºè´­ç‰©è½¦ï¼ˆæ¡ä»¶ï¼šå½“å‰ç”¨æˆ·ï¼Œå½“å‰å•†å®¶ï¼‰
 			cartDao.removeCart(cart);
 			
 			DBUtil.commitTransaction();
@@ -79,9 +79,9 @@ public class OrdersServiceImpl implements OrdersService{
 		try {
 			DBUtil.getConnection();
 			
-			//1¡¢¸ù¾İID²éÑ¯¶©µ¥ĞÅÏ¢
+			//1ã€æ ¹æ®IDæŸ¥è¯¢è®¢å•ä¿¡æ¯
 			orders = ordersDao.getOrdersById(orderId);
-			//2¡¢¸ù¾İ¶©µ¥ID²éÑ¯¶©µ¥Ã÷Ï¸ĞÅÏ¢
+			//2ã€æ ¹æ®è®¢å•IDæŸ¥è¯¢è®¢å•æ˜ç»†ä¿¡æ¯
 			List<OrderDetailet> list = orderDetailetDao.listOrderDetailetByOrderId(orderId);
 			orders.setList(list);
 			

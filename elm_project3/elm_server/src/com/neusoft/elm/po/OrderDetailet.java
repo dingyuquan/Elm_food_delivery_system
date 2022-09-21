@@ -6,7 +6,7 @@ public class OrderDetailet {
 	private Integer orderId;
 	private Integer foodId;
 	private Integer quantity;
-	private Food food; 	//¶à¶ÔÒ»£ºËùÊôÊ³Æ·
+	private Food food; 	//å¤šå¯¹ä¸€ï¼šæ‰€å±é£Ÿå“
 	
 	public Integer getOdId() {
 		return odId;

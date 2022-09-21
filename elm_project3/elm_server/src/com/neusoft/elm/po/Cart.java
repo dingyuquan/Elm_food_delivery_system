@@ -7,8 +7,8 @@ public class Cart {
 	private Integer businessId;
 	private String userId;
 	private Integer quantity;
-	private Food food; //¶à¶ÔÒ»£ºËùÊôÊ³Æ·
-	private Business business; 	//¶à¶ÔÒ»£ºËùÊôÉÌ¼Ò
+	private Food food; //å¤šå¯¹ä¸€ï¼šæ‰€å±é£Ÿå“
+	private Business business; 	//å¤šå¯¹ä¸€ï¼šæ‰€å±å•†å®¶
 	
 	public Integer getCartId() {
 		return cartId;

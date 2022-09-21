@@ -9,10 +9,10 @@ public class Orders {
 	private Integer businessId;
 	private String orderDate;
 	private Double orderTotal;
-	private Integer daId; //ËÍ»õµØÖ·±àºÅ
-	private Integer orderState; //¶©µ¥×´Ì¬£¨0£ºÎ´Ö§¸¶£» 1£ºÒÑÖ§¸¶£©
-	private Business business; 	//¶à¶ÔÒ»£ºËùÊôÉÌ¼Ò
-	private List<OrderDetailet> list; 	//Ò»¶Ô¶à£º¶©µ¥Ã÷Ï¸
+	private Integer daId; //é€è´§åœ°å€ç¼–å·
+	private Integer orderState; //è®¢å•çŠ¶æ€ï¼ˆ0ï¼šæœªæ”¯ä»˜ï¼› 1ï¼šå·²æ”¯ä»˜ï¼‰
+	private Business business; 	//å¤šå¯¹ä¸€ï¼šæ‰€å±å•†å®¶
+	private List<OrderDetailet> list; 	//ä¸€å¯¹å¤šï¼šè®¢å•æ˜ç»†
 	
 	public Integer getOrderId() {
 		return orderId;

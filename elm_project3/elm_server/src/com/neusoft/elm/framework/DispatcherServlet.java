@@ -17,15 +17,15 @@ public class DispatcherServlet extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		//ÖĞÎÄ±àÂë´¦Àí
+		//ä¸­æ–‡ç¼–ç å¤„ç†
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("application/json;charset=utf-8");
 		
-		//»ñÈ¡¿Í»§¶ËÇëÇóÂ·¾¶
+		//è·å–å®¢æˆ·ç«¯è¯·æ±‚è·¯å¾„
 		String path = request.getServletPath();
 		
-		//¸ù¾İÇëÇóÂ·¾¶½«controller×é¼şÀàÃûÓë·½·¨½âÎö
+		//æ ¹æ®è¯·æ±‚è·¯å¾„å°†controllerç»„ä»¶ç±»åä¸æ–¹æ³•è§£æ
 		String className = path.substring(1, path.lastIndexOf("/"));
 		String methodName = path.substring(path.lastIndexOf("/")+1);
 		//System.out.println(className);
@@ -46,8 +46,8 @@ public class DispatcherServlet extends HttpServlet{
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("DispatcherServletĞÅÏ¢£ºServletÇëÇóÂ·¾¶£º" + path);
-			System.out.println("DispatcherServletĞÅÏ¢£ºÀàÃû" + className + "\t·½·¨Ãû£º" + methodName);
+			System.out.println("DispatcherServletä¿¡æ¯ï¼šServletè¯·æ±‚è·¯å¾„ï¼š" + path);
+			System.out.println("DispatcherServletä¿¡æ¯ï¼šç±»å" + className + "\tæ–¹æ³•åï¼š" + methodName);
 
 		} finally {
 			out.close();

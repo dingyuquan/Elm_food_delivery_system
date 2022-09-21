@@ -8,14 +8,14 @@ import java.sql.SQLException;
 
 public class DBUtil {
 	
-	private static final String URL = "jdbc:mysql://rm-2zeddvd91s6909at2bo.mysql.rds.aliyuncs.com:3306/elm?characterEncoding=utf-8";
+	private static final String URL = "jdbc:mysql://localhost:3306/elm_admin?characterEncoding=utf-8";
 	private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-	private static final String USERNAME = "elm_sql";
-	private static final String PASSWORD = "elm2022#";
+	private static final String USERNAME = "root";
+	private static final String PASSWORD = "admin";
 	
 	private static final ThreadLocal<Connection> TL = new ThreadLocal<>();
 	
-	//»ñÈ¡Connection
+	//è·å–Connection
 	public static Connection getConnection() {
 		Connection con = null;
 		con = TL.get();
@@ -26,7 +26,7 @@ public class DBUtil {
 		return con;
 	}
 	
-	//¿ªÆôÒ»¸öÊÂÎñ
+	//å¼€å¯ä¸€ä¸ªäº‹åŠ¡
 	public static void beginTransaction() throws Exception{
 		Connection con = null;
 		con = TL.get();
@@ -37,19 +37,19 @@ public class DBUtil {
 		con.setAutoCommit(false);		
 	}
 	
-	//Ìá½»Ò»¸öÊÂÎñ
+	//æäº¤ä¸€ä¸ªäº‹åŠ¡
 	public static void commitTransaction() throws Exception{
 		Connection con = TL.get();
 		con.commit();
 	}
 	
-	//»Ø¹öÒ»¸öÊÂÎñ
+	//å›æ»šä¸€ä¸ªäº‹åŠ¡
 	public static void rollbackTransation() throws Exception{
 		Connection con = TL.get();
 		con.rollback();
 	}
 	
-	//¹Ø±Õ×ÊÔ´
+	//å…³é—­èµ„æº
 	public static void close(ResultSet rs, PreparedStatement pst) {
 			try {
 				if(rs != null) {
