@@ -14,7 +14,7 @@
 		<!-- 商家信息部分 -->
 		<div class="business-info">
 			<h1>{{business.businessName}}</h1>
-			<p>&#165;20{{business.starPrice}} &#165;4{{business.deliveryPrice}}</p>
+			<p>&#165;{{business.starPrice}}起送 &#165;{{business.deliveryPrice}}配送</p>
 			<p>{{business.businessExplain}}</p>
 		</div>
 
