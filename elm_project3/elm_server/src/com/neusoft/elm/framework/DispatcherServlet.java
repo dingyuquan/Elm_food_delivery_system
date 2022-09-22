@@ -24,7 +24,6 @@ public class DispatcherServlet extends HttpServlet{
 		
 		//获取客户端请求路径
 		String path = request.getServletPath();
-		
 		//根据请求路径将controller组件类名与方法解析
 		String className = path.substring(1, path.lastIndexOf("/"));
 		String methodName = path.substring(path.lastIndexOf("/")+1);

@@ -2,14 +2,23 @@
 1. 直接吧elm_server文件导入sts即可，本地有servers文件夹的，而且gitee上传的的elm_server里没有servers
 2. 往gitee上传elm_server不用带着servers文件夹
 3. 导入elm_server文件后记得修改/src/.../util/DBUtil里的password常量，其值应为本地mysql root账户的密码 
-4. vue报错“‘vue-cli-service‘不是内部或外部命令，也不是...”时，可以尝试如下方法：
+
+4. 从远端拉下来的server报大量错原因：咱们不同电脑jre版本不同因此需修改jre，修改方法如下：
+elm_server上右键->build and path->configure build path后，将其中libraries里面报错的jre system libraries remove后，点击右边add library后选择jre library后加入即可解决报错
+5. 404原因：主要原因：在网页输入的地址不对！应该是http://localhost:8080/elm_server/，而不是http://localhost:8080/elm/，即应该与sts里的工程名称一致（咱曾经为了前后端命名一致，把后端工程名由elm改为了elm_server，因此导致了这个问题，这也是为什么郭璇自己建的工程能测，因为工程名字是elm没改过）。
+	    次要原因：刚从gitee拉下来时，tomcat启动前，要右键tomcat->add and remove后，将刚拉下来的elm_server选上，这样才能用tomcat接收。
+	    次要原因：当使用的数据库是本地时，数据库名字不是elm_server，而是elm（可以去mysql workbench里看），因此需要修改后端代码里Util包下的DBUtil里URL常量字段里的elm_server，改为elm（与自己想连接的数据库一致，，这个地方我改了已经）
+6. 关于编码与汉字的问题：使用基于utf-8的工程就可以，已经试过，可以从浏览器接收汉字，没有乱码。
+7. 整个工程里有的代码（比如第三部分）暂时不能跑，里面报错，不会影响前面功能的测试
+
+8. vue报错“‘vue-cli-service‘不是内部或外部命令，也不是...”时，可以尝试如下方法：
 	（1）删除elm_client内的node_module文件夹
 	（2）打开终端运行：npm install
 	（3）终端：npm run serve
 即注意在项目拷贝或git时，要省略掉node_module
-5. vue启动时出错，可以尝试检查elm_client下/src/router/index.js文件里，开头的import Index from '../views/index.vue'与对应位置的文件index.vue大小写是否一致。
-6. 项目三的第三部分已做完，但在前两部分做完之前，项目可能一直无法运行，因此可能无法测试。
-7. 项目三的第三部分进行的所有工作：
+9. vue启动时出错，可以尝试检查elm_client下/src/router/index.js文件里，开头的import Index from '../views/index.vue'与对应位置的文件index.vue大小写是否一致。
+10. 项目三的第三部分已做完，但在前两部分做完之前，项目可能一直无法运行，因此可能无法测试。
+11. 项目三的第三部分进行的所有工作：
 	（1）前端 src/router/index.js
 	头中添加UserAddress
 	（2）前端 src/views/UserAddress.vue（做得不标准）
