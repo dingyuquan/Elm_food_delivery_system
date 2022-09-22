@@ -16,6 +16,24 @@ public class UserController {
 		 return user;
 	}
 	
+	public Object getUserById(HttpServletRequest request) throws Exception{
+		 String userId = request.getParameter("userId");
+		 UserService service = new UserServiceImpl();
+		 int result = service.getUserById(userId);
+		 return result;
+	}
+	
+	public Object saveUser(HttpServletRequest request) throws Exception{
+		 User user = new User();
+		 user.setUserId(request.getParameter("userId"));
+		 user.setPassword(request.getParameter("password"));
+		 user.setUserName(request.getParameter("userName"));
+		 user.setUserSex(Integer.valueOf(request.getParameter("userSex")));
+		 UserService service = new UserServiceImpl();
+		 int result = service.saveUser(user);
+		 return result;
+	}
+	
 	public Object login(HttpServletRequest request) {
 		String username = request.getParameter("username");
 		System.out.println(username);

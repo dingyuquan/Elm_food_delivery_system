@@ -23,5 +23,12 @@ public class OrdersController {
 		Orders orders = service.getOrdersById(orderId);
 		return orders;
 	}
+	
+	public Object listOrdersByUserId(HttpServletRequest request) throws Exception {
+		String userId = request.getParameter("userId");
+		OrdersService service = new OrdersServiceImpl();
+		List<Orders> list = service.listOrdersByUserId(userId);
+		return list;
+	}
 
 }

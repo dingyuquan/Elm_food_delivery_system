@@ -22,4 +22,36 @@ public class UserServiceImpl implements UserService{
 		}
 		return user;
 	}
+
+	@Override
+	public int getUserById(String userId) {
+		// TODO Auto-generated method stub
+		int result = 0;
+		UserDao dao = new UserDaoImpl();
+		try {
+			DBUtil.getConnection();
+			result = dao.getUserById(userId);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBUtil.close();
+		}
+		return result;
+	}
+
+	@Override
+	public int saveUser(User user) {
+		// TODO Auto-generated method stub
+		int result = 0;
+		UserDao dao = new UserDaoImpl();
+		try {
+			DBUtil.getConnection();
+			result = dao.saveUser(user);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBUtil.close();
+		}
+		return result;
+	}
 }

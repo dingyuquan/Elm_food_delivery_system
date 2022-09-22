@@ -3,6 +3,8 @@ package com.neusoft.elm.dao.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.neusoft.elm.po.Business;
 import com.neusoft.elm.po.Orders;
@@ -75,6 +77,47 @@ public class OrdersDaoImpl implements OrdersDao{
 		}
 		
 		return orders;
+	}
+
+	@Override
+	public List<Orders> listOrdersByUserId(String userId) throws Exception {
+		// TODO Auto-generated method stub
+		List<Orders> list = new ArrayList<>();
+		StringBuffer sql = new StringBuffer();
+		sql.append(" select o.*, ");
+		sql.append(" b.businessId bbusinessId, ");
+		sql.append(" b.businessName bbusinessName, ");
+		sql.append(" b.deliveryPrice bdeliveryPrice ");
+		sql.append(" from orders o left join business b on o.businessId=b.businessId ");
+		sql.append(" where o.userId=? ");
+		try {
+			con = DBUtil.getConnection();
+			pst = con.prepareStatement(sql.toString());
+			pst.setString(1, userId);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				Orders orders = new Orders();
+				orders.setOrderId(rs.getInt("orderId"));
+				orders.setUserId(rs.getString("userId"));
+				orders.setBusinessId(rs.getInt("businessId"));
+				orders.setOrderDate(rs.getString("orderDate"));
+				orders.setOrderTotal(rs.getDouble("orderTotal"));
+				orders.setDaId(rs.getInt("daId"));
+				orders.setOrderState(rs.getInt("orderState"));
+
+				Business business = new Business();
+				business.setBusinessId(rs.getInt("bbusinessId"));
+				business.setBusinessName(rs.getString("bbusinessName"));
+				business.setDeliveryPrice(rs.getDouble("bdeliveryPrice"));
+				orders.setBusiness(business);
+				
+				list.add(orders);
+			}
+		}finally {
+			DBUtil.close(pst);
+		}
+		
+		return list;
 	}
 
 }
