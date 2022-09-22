@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.neusoft.elm.dao.CartDao;
+import com.neusoft.elm.po.Business;
 import com.neusoft.elm.po.Cart;
 import com.neusoft.elm.po.Food;
 import com.neusoft.elm.util.DBUtil;
@@ -73,7 +74,7 @@ public class CartDaoImpl implements CartDao{
 	
 	@Override
 	public List<Cart> listCart(Cart cart) throws Exception{
-		List<Cart> new ArrayList();
+		List<Cart> list = new ArrayList();
  		StringBuffer sql = new StringBuffer();
  		sql.append(" select c.*, ");
  		sql.append("        f.foodId ffoodId, ");
@@ -102,12 +103,44 @@ public class CartDaoImpl implements CartDao{
 			con = DBUtil.getConnection();
 			pst = con.prepareStatement(sql.toString());
 			pst.setString(1, cart.getUserId());
-			pst.setInt(2, cart.getBusinessId());
-			result = pst.executeUpdate();
+			rs = pst.executeQuery();
+			while(rs.next()) {
+				Cart c = new Cart();
+				c.setCartId(rs.getInt("cartId"));
+				c.setFoodId(rs.getInt("foodId"));
+				c.setBusinessId(rs.getInt("businessId"));
+				c.setUserId(rs.getString("userId"));
+				c.setQuantity(rs.getInt("quantity"));
+				
+				Food food = new Food();
+				food.setFoodId(rs.getInt("ffoodId"));
+				food.setFoodName(rs.getString("ffoodName"));
+				food.setFoodExplain(rs.getString("ffoodExplain"));
+				food.setFoodImg(rs.getString("ffoodImg"));
+				food.setFoodPrice(rs.getDouble("ffoodPrice"));
+				food.setBusinessId(rs.getInt("fbusinessId"));
+				food.setRemarks(rs.getString("fremarks"));
+				c.setFood(food);
+				
+				Business business = new Business();
+				business.setBusinessId(rs.getInt("bbusinessId"));
+				business.setBusinessName(rs.getString("bbusinessName"));
+				business.setBusinessAddress(rs.getString("bbusinessAddress"));
+				business.setBusinessExplain(rs.getString("bbusinessExplain"));
+				business.setBusinessImg(rs.getString("bbusinessImg"));
+				business.setOrderTypeId(rs.getInt("borderTypeId"));
+				business.setStarPrice(rs.getDouble("bstarPrice"));
+				business.setDeliveryPrice(rs.getDouble("bdeliveryPrice"));
+				business.setRemarks(rs.getString("bremarks"));
+				c.setBusiness(business);
+				
+				list.add(c);
+				
+			}
 		}finally {
 			DBUtil.close(pst);
 		}
-		return result;
+		return list;
 	}
 
 }

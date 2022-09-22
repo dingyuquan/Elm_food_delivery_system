@@ -1,6 +1,8 @@
 package com.neusoft.elm.service.impl;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import com.neusoft.elm.dao.CartDao;
 import com.neusoft.elm.dao.impl.CartDaoImpl;
 import com.neusoft.elm.po.Cart;
@@ -56,5 +58,21 @@ public class CartServiceImpl implements CartService{
 			DBUtil.close();
 		}
 		return result;
+	}
+	
+	@Override
+	public List<Cart> listCart(Cart cart){
+		List<Cart> list = new ArrayList();
+		CartDao dao = new CartDaoImpl();
+		try {
+			DBUtil.getConnection();
+			list = dao.listCart(cart);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			DBUtil.close();
+		}
+		return list;
 	}
 }
