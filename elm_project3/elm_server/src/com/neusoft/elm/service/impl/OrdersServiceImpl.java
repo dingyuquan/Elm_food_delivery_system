@@ -20,7 +20,7 @@ public class OrdersServiceImpl implements OrdersService{
 	public int createOrders(String userId, Integer businessId, Integer daId, Double orderTotal) {
 		int orderId = 0;
 		
-		CartDao dao = new CartDaoImpl();
+		CartDao cartDao = new CartDaoImpl();
 		OrdersDao ordersDao = new OrdersDaoImpl();
 		OrderDetailetDao orderDetailetDao = new OrderDetailetDaoImpl();
 		
