@@ -81,7 +81,7 @@
 			}
 		},
 		destroyed(){
-			window.onpopstate() = null;
+			window.onpopstate = null;
 		},
 		methods:{
 			detailetShow(){

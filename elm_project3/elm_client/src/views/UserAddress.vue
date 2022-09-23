@@ -32,10 +32,10 @@
 	import Footer from '../components/Footer.vue';
 
 	export default {
-		name =: 'UserAddress',
+		name: 'UserAddress',
 		data() {
 			return {
-				businessId:this.$route.query.businessId,
+				businessId: this.$route.query.businessId,
 				user: {},
 				deliveryAddressArr: []
 			}
@@ -43,32 +43,78 @@
 		created() {
 			this.user = this.$getSessionStorage('user');
 
-			//查询送货地址
-			this.$axios.post('DeliveryAddressController/listDeliveryAddressByUserId', this.$qs.stringify({
-				userId: this.user.userId
-			})).then(response => {
-				this.deliveryAddressArr = response.data;
-			}).catch(error => {
-				console.error(error);
-			});
+			this.listDeliveryAddressByUserId();
 		},
-	},
-	components: {
-		Footer
-	},
-	filters:{
-		sexFilter(value){
-			return value==1?'先生':'女士';
-		}
-	},
-	methods:{
-		setDeliveryAddress(deliveryAddress){
-			//把用户选择的默认送货地址存储到localStorage中
-			this.$setLocalStorage(this.user.userId,deliveryAddress);
-			this.$router.push({path:'/orders', query:{businessId:this.businessId}});
-		}
-	}
+		components: {
+			Footer
+		},
+		filters: {
+			sexFilter(value) {
+				return value == 1 ? '先生' : '女士';
+			}
+		},
+		methods: {
+			listDeliveryAddressByUserId() {
+				//查询送货地址
 
+				this.$axios.post('DeliveryAddressController/listDeliveryAddressByUserId', this.$qs.stringify({
+					userId: this.user.userId
+				})).then(response => {
+					this.deliveryAddressArr = response.data;
+				}).catch(error => {
+					console.error(error);
+				});
+			},
+			setDeliveryAddress(deliveryAddress) {
+				//把用户选择的默认送货地址存储到localStorage中
+				this.$setLocalStorage(this.user.userId, deliveryAddress);
+				this.$router.push({
+					path: '/orders',
+					query: {
+						businessId: this.businessId
+					}
+				});
+			},
+			toAddUserAddress() {
+				this.$router.push({
+					path: '/addUserAddress',
+					query: {
+						businessId: this.businessId
+					}
+				});
+			},
+			editUserAddress(daId) {
+				this.$router.push({
+					path: '/editUserAddress',
+					query: {
+						businessId: this.businessId,
+						daId: daId
+					}
+				});
+			},
+			removeUserAddress(daId) {
+				if (!confirm('确认要删除此送货地址吗？')) {
+					return;
+				}
+
+
+				this.$axios.post('DeliveryAddressController/removeDeliveryAddress', this.$qs.stringify({
+					daId: daId
+				})).then(response => {
+					if (response.data > 0) {
+						let deliveryAddress = this.$getLocalStorage(this.user.userId);
+						if (deliveryAddress != null && deliveryAddress.daId == daId) {
+							this.$removeLocalStorage(this.user.userId);
+						}
+						this.listDeliveryAddressByUserId();
+					} else {
+						alert('删除地址失败！');
+					}
+				}).catch(error => {
+					console.error(error);
+				});
+			}
+		}
 	}
 </script>
 

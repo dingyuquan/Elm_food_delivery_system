@@ -76,7 +76,7 @@
 				}).catch(error => {
 					console.error(error);
 				});
-			}
+			},
 			toBusinessInfo(businessId){
 				this.$router.push({path:'/businessInfo',query:{businessId:businessId}});
 			}
