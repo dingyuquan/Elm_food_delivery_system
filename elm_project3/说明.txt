@@ -21,33 +21,68 @@ elm_server上右键->build and path->configure build path后，将其中librarie
 11. 项目三的第三部分进行的所有工作：
 	（1）前端 src/router/index.js
 	头中添加UserAddress
-	（2）前端 src/views/UserAddress.vue（做得不标准）
-	新建
-	
-	（3）后端 service包
-	OrdersService.java
-	（4）后端 service.impl
-	OrdersServiceImpl.java
-	（5）后端 dao包
-	OrdersDao.java
-	（6）后端 dao.impl
-	OrdersDaoImpl.java
-	（7）后端 util.CommonUtil.java
-	（8）后端 dao包
-	OrderDetailetDao.java
-	（9）后端 dao.impl
-	OrderDetailetDaoImpl.java
-	（10）后端 controller
-	OrdersController.java
-	
-	（11）前端 src/views/Payment.vue
-	新建
-	头中添加Payment
-	（12）前端 src/components/Footer.vue中
-	第三行去除一层div
-	第三行添加@click
-	第20行修改export default
+（2）前端 src/views/UserAddress.vue（做得不标准）
+新建
 
+（3）后端 service包
+OrdersService.java
+（4）后端 service.impl
+OrdersServiceImpl.java
+（5）后端 dao包
+OrdersDao.java
+（6）后端 dao.impl
+OrdersDaoImpl.java
+（7）后端 util.CommonUtil.java
+（8）后端 dao包
+OrderDetailetDao.java
+（9）后端 dao.impl
+OrderDetailetDaoImpl.java
+（10）后端 controller
+OrdersController.java
+
+（11）前端 src/views/Payment.vue
+新建
+头中添加Payment
+（12）前端 src/components/Footer.vue中
+第三行去除一层div
+第三行添加@click
+第20行修改export default
+（13）前端src/views/Orders.vue
+100行处改为：
+this.$router.push({path:'/userAddress',businessId:this.businessId});
+第43行删掉了 onclick="location.href='payment.html'"
+添加：@click="toPayment"
+102行处添加：
+toPayment(){
+	if(this.deliveryaddress==null){
+		alert('请选择送货地址！');
+		return;
+	}
+	this.$axios.post('OrdersController/createOrders', this.$qs.stringify({
+		userId:this.user.userId,
+		businessId:this.businessId,
+		daId:this.deliveryaddress.daId,
+		orderTotal:this.totalPrice
+	})).then(response=>{
+		let orderId = response.data;
+		if(orderId>0){
+			this.$router.push({path:'/payment',query:{orderId:}})
+		}else{
+			alert('创建订单失败！');
+		}
+	}).catch(error=>{
+		console.error(error);
+	});
+	}
+（视频8）
+（14）后端po.Orders.java中
+第16行private Integer businessId改为
+private Business business;
+并添加getter,setter方法
+（15） 后端po.Orders.java中
+第18行添加：
+private List<OrderDetailet> list;
+并添加getter,setter方法
 
 
 

@@ -40,7 +40,7 @@
 			<div class="total-left">
 				&#165;{{totalPrice}}
 			</div>
-			<div class="total-right" onclick="location.href='payment.html'">
+			<div class="total-right" @click="toPayment">
 				去支付
 			</div>
 		</div>
@@ -98,7 +98,29 @@
 		},
 		methods:{
 			toUserAddress(){
-				this.$router.push({path:'userAddress'});
+				this.$router.push({path:'/userAddress',businessId:this.businessId});
+			},
+			toPayment(){
+				if(this.deliveryaddress==null){
+					alert('请选择送货地址！');
+					return;
+				}
+				this.$axios.post('OrdersController/createOrders', this.$qs.stringify({
+					userId:this.user.userId,
+					businessId:this.businessId,
+					daId:this.deliveryaddress.daId,
+					orderTotal:this.totalPrice
+				})).then(response=>{
+					let orderId = response.data;
+					if(orderId>0){
+						this.$router.push({path:'/payment',query:{orderId:}})
+					}else{
+						alert('创建订单失败！');
+					}
+				}).catch(error=>{
+					console.error(error);
+				});
+			
 			}
 		}
 	}

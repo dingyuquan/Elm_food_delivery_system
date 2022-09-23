@@ -1,27 +1,33 @@
 <template>
 	<ul class="footer">
-		<div class="footer-fixed">
-			<li onclick="location.href='index.html'">
-				<i class="fa fa-home"></i>
-				<p>首页</p>
-			</li>
-			<li>
-				<i class="fa fa-compass"></i>
-				<p>发现</p>
-			</li>
-			<li onclick="location.href='orderList.html'">
-				<i class="fa fa-file-text-o"></i>
-				<p>订单</p>
-			</li>
-			<li onclick="location.href='login.html'">
-				<i class="fa fa-user-o"></i>
-				<p>我的</p>
-			</li>
-		</div>
+		<li @click="toIndex">
+			<i class="fa fa-home"></i>
+			<p>首页</p>
+		</li>
+		<li>
+			<i class="fa fa-compass"></i>
+			<p>发现</p>
+		</li>
+		<li onclick="location.href='orderList.html'">
+			<i class="fa fa-file-text-o"></i>
+			<p>订单</p>
+		</li>
+		<li onclick="location.href='login.html'">
+			<i class="fa fa-user-o"></i>
+			<p>我的</p>
+		</li>
 	</ul>
 </template>
 
 <script>
+	export default{
+		name:'Footer',
+		methods:{
+			toIndex(){
+				this.$router.push({path:'/index'});
+			}
+		}
+	}
 </script>
 
 <style>
