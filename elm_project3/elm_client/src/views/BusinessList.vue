@@ -7,9 +7,9 @@
 		</header>
 
 		<!--商家列表部分 -->
-		<ul class='business'>
+		<ul class="business">
 			<li v-for="item in businessArr" @click="toBusinessInfo(item.businessId)">
-				<div class='business-img'>
+				<div class="business-img">
 					<img :src="item.businessImg">
 					<div class="business-img-quantity" v-show="item.quantity>0">{{item.quantity}}</div>
 				</div>
@@ -113,7 +113,7 @@
 	.wrapper .business {
 		width: 100%;
 		margin-top: 12vw;
-		margin-bottom: 14vw;
+		padding-bottom: 14vw;
 
 	}
 
