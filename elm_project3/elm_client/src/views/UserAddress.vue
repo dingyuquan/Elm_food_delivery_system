@@ -102,6 +102,7 @@
 					daId: daId
 				})).then(response => {
 					if (response.data > 0) {
+						//判断删除的地址是否为LocalStorage中存储的地址
 						let deliveryAddress = this.$getLocalStorage(this.user.userId);
 						if (deliveryAddress != null && deliveryAddress.daId == daId) {
 							this.$removeLocalStorage(this.user.userId);

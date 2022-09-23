@@ -8,6 +8,9 @@ import Orders from '../views/Orders.vue'
 import OrderList from '../views/OrderList.vue'
 import UserAddress from '../views/UserAddress.vue'
 import Payment from '../views/Payment.vue'
+import AddUserAddress from '../views/AddUserAddress.vue'
+import EditUserAddress from '../views/EditUserAddress.vue'
+import Register from '../views/Register.vue'
 
 Vue.use(VueRouter)
 
@@ -55,6 +58,21 @@ const routes = [{
 		path: '/Payment',
 		name: 'Payment',
 		component: Payment
+	},
+	{
+		path: '/addUserAddress',
+		name: 'AddUserAddress',
+		component: AddUserAddress
+	},
+	{
+		path: '/editUserAddress',
+		name: 'EditUserAddress',
+		component: EditUserAddress
+	},
+	{
+		path: '/register',
+		name: 'Register',
+		component: Register
 	}
 ]
 

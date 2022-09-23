@@ -8,7 +8,7 @@
 			<i class="fa fa-compass"></i>
 			<p>发现</p>
 		</li>
-		<li onclick="location.href='orderList.html'">
+		<li @click="toOrderList">
 			<i class="fa fa-file-text-o"></i>
 			<p>订单</p>
 		</li>
@@ -25,6 +25,9 @@
 		methods:{
 			toIndex(){
 				this.$router.push({path:'/index'});
+			},
+			toOrderList(){
+				this.$router.push({path:'/orderList'});
 			}
 		}
 	}
@@ -32,11 +35,6 @@
 
 <style>
 	.wrapper .footer {
-		width: 100%;
-		height: 14vw;
-	}
-
-	.wrapper .footer .footer-fixed {
 		width: 100%;
 		height: 14vw;
 		border-top: solid 1px #DDD;
