@@ -66,8 +66,8 @@ public class OrdersServiceImpl implements OrdersService{
 			e.printStackTrace();
 		}finally {
 			DBUtil.close();
-			return orderId;
 		}
+		return orderId;
 	}
 	@Override
 	public Orders getOrdersById(Integer orderId) {

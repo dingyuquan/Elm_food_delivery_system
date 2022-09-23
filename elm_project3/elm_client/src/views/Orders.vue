@@ -85,7 +85,7 @@
 			totalPrice(){
 				let totalPrice = 0;
 				for(let cartItem of this.cartArr){
-					totalPrice += cartItem.food.foodPrice*cartItem.food.quantity;
+					totalPrice += cartItem.food.foodPrice*cartItem.quantity;
 				}
 				totalPrice += this.business.deliveryPrice;
 				return totalPrice;

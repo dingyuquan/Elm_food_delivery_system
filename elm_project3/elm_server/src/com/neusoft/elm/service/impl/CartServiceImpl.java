@@ -6,7 +6,6 @@ import java.util.List;
 import com.neusoft.elm.dao.CartDao;
 import com.neusoft.elm.dao.impl.CartDaoImpl;
 import com.neusoft.elm.po.Cart;
-import com.neusoft.elm.po.Food;
 import com.neusoft.elm.service.CartService;
 import com.neusoft.elm.util.DBUtil;
 

@@ -137,7 +137,7 @@
 
 				if(this.foodArr[index].quantity==0){
 					//做insert
-					this.saveCart();
+					this.saveCart(index);
 				}else{
 					//做update
 					this.updateCart(index,1);
@@ -306,7 +306,7 @@
 	/********************* 食品列表部分 *************************/
 	.wrapper .food {
 		width: 100%;
-		margin-bottom: 14vw;
+		padding-bottom: 14vw;
 	}
 
 	.wrapper .food li {
