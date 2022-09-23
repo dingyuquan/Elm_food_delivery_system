@@ -11,7 +11,7 @@
 			<li v-for="item in businessArr" @click="toBusinessInfo(item.businessId)">
 				<div class='business-img'>
 					<img :src="item.businessImg">
-					<div class="business-img-quantity" v-show="item.quantity>0">3</div>
+					<div class="business-img-quantity" v-show="item.quantity>0">{{item.quantity}}</div>
 				</div>
 				<div class="business-info">
 					<h3>{{item.businessName}}</h3>
@@ -34,15 +34,22 @@
 		data() {
 			return {
 				orderTypeId: this.$route.query.orderTypeId,
-				businessArr: []
+				businessArr: [],
+				user:{}
 			}
 		},
 		created() {
+			this.user = this.$getSessionStorage('user');
+			
 			//根据orderTypeId查询商家信息
 			this.$axios.post('BusinessController/listBusinessByOrderTypeId', this.$qs.stringify({
 				orderTypeId: this.orderTypeId
 			})).then(response => {
 				this.businessArr = response.data;
+				//判断是否登录
+				if(this.user!=null){
+					this.listCart();
+				}
 			}).catch(error => {
 				console.error(error);
 			});
@@ -51,6 +58,25 @@
 			Footer
 		},
 		methods:{
+			listCart(){
+				this.$axios.post('CartController/listCart', this.$qs.stringify({
+					userId: this.user.userId,
+				})).then(response => {
+					let cartArr = response.data;
+					//遍历所有食品列表
+					for(let businessItem of this.businessArr){
+						businessItem.quantity = 0;
+						for(let cartItem of cartArr){
+							if(cartItem.businessId==businessItem.businessId){
+								businessItem.quantity += cartItem.quantity;
+							}
+						}
+					}
+					this.businessArr.sort();
+				}).catch(error => {
+					console.error(error);
+				});
+			}
 			toBusinessInfo(businessId){
 				this.$router.push({path:'/businessInfo',query:{businessId:businessId}});
 			}
