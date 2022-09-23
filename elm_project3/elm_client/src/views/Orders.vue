@@ -3,7 +3,7 @@
 
 		<!--header部分 -->
 		<header>
-			<p>商家信息</p>
+			<p>确认订单</p>
 		</header>
 
 		<!--订单信息部分 -->
@@ -98,7 +98,7 @@
 		},
 		methods:{
 			toUserAddress(){
-				this.$router.push({path:'/userAddress',businessId:this.businessId});
+				this.$router.push({path:'/userAddress',query:{businessId:this.businessId}});
 			},
 			toPayment(){
 				if(this.deliveryaddress==null){
