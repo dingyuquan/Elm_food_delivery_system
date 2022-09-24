@@ -464,6 +464,7 @@
 	/********************* 推荐商家列表 *************************/
 	.wrapper .business {
 		width: 100%;
+		padding-bottom: 14vw;
 	}
 
 	.wrapper .business li {
