@@ -1,0 +1,10 @@
+一、环境配置及运行时问题
+1. sts运行会报错：可能是由于jre版本问题，解决办法：将pom.xml文件中java.verson改为1.8后，选中elmboot项目->maven->update project即可解决。
+2. 从client端口（8081）点进商家列表无显示，可能有以下原因：
+	原因1:404错误，代表前后端连接有问题，解决办法：更改前端代码中main.js文件中axios.defaults.baseURL = 'http://localhost:8080/elm';以与项目四的客户端一致。
+	原因2:500错误，代表后端或与数据库连接有问题，可能为mysql-connector-java版本过老，一些语法不支持。解决办法：更改后端代码中pom.xml文件中mysql-connector-java的版本为8.0.30，
+		然后更改src/main/resources的application.properties文件中，spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver，
+		以上都保存后选中elmboot项目->maven->update project即可解决。
+	原因3:可能报一些与cors有关的错，解决办法：使用edge浏览器安装cors接触封锁插件，再刷新重试。
+3. 从gitee拉项目时，也需要修改数据库密码，在src/main/resources的application.properties文件中。
+	此外，若还有与jre有关的问题，解决方法同1.所示。
