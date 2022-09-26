@@ -50,12 +50,31 @@
 		},
 		methods:{
 			login(){
-				if(this.userId==''){
-					alert('手机号不能为空!');
+				const reg = /^[1][3,4,5,6,7,8,9][0-9]{9}$/;
+				if (this.userId == '') {
+					this.imgShow = false;
+					this.$message({
+						message: "手机号不能为空！",
+						type: 'warning',
+						duration: 1500
+					});
+					return;
+				}
+				if (this.userId.length != 11 || !reg.test(this.userId)) {
+					this.imgShow = false;
+					this.$message({
+						message: "请填写正确的手机号！",
+						type: 'warning',
+						duration: 1500
+					});
 					return;
 				}
 				if(this.password==''){
-					alert('密码不能为空!');
+					this.$message({
+						message: '密码不能为空!',
+						type: 'warning',
+						duration: 1500
+					});
 					return;
 				}
 				
@@ -66,7 +85,7 @@
 				})).then(response => {
 					let user = response.data;
 					if(user==null){
-						alert('用户名或密码不正确!');
+						this.$message.error('用户名或密码不正确!');
 					}else{
 						//防止数据溢出，不将用户头像放入setSessionStorage（setSessionStorage有容量限制）
 						user.userImg='';

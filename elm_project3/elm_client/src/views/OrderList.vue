@@ -17,7 +17,7 @@
 					</p>
 					<div class="order-info-right">
 						<p>&#165;{{item.orderTotal}}</p>
-						<div class="order-info-right-icon">去支付</div>
+						<div class="order-info-right-icon" @click="toPayment(item)">去支付</div>
 					</div>
 				</div>
 
@@ -95,6 +95,10 @@
 		methods:{
 			detailetShow(orders){
 				orders.isShowDetailet = !orders.isShowDetailet;
+			},
+			toPayment(item){
+				let orderId = item.orderId;
+				this.$router.push({path:'/payment',query:{orderId:orderId}});
 			}
 		},
 		components:{

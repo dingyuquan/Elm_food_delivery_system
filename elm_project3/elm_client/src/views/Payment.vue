@@ -181,7 +181,7 @@
 
 	.wrapper .payment-type li img {
 		width: 33vw;
-		height: 20vw;
+		height: 11vw;
 	}
 
 	.wrapper .payment-type li .fa-check-circle {
