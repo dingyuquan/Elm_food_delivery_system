@@ -61,7 +61,7 @@
 		</ul>
 
 		<!-- 底部菜单部分 -->
-		<Footer></Footer>>
+		<Footer></Footer>
 		
 	</div>
 </template>

@@ -60,8 +60,12 @@
 			</li>
 		</ul>
 
+		<div class="blank">
+			
+		</div>
+
 		<!-- 底部菜单部分 -->
-		<Footer></Footer>>
+		<Footer></Footer>
 		
 	</div>
 </template>
@@ -185,4 +189,10 @@
 		justify-content: space-between;
 		align-items: center;
 	}
+	
+	.wrapper .blank {
+		width: 100%;
+		height: 14vw;
+	}
+	
 </style>
