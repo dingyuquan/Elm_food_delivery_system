@@ -121,6 +121,7 @@
 
 	/********************* 订单信息 *************************/
 	.wrapper h3 {
+		margin-top: 12vw;
 		box-sizing: border-box;
 		padding: 4vw 4vw 0;
 

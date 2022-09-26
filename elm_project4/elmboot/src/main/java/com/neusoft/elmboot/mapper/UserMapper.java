@@ -10,4 +10,9 @@ public interface UserMapper {
 	@Select("select * from user where userId=#{userId} and password=#{password}")
 	public User getUserByIdByPass(User user);
 
+	@Select("select count(*) from user where userId=#{userId}")
+	public int getUserById(String userId);
+	
+	@Insert("insert into user values(#{userId},#{password},#{userName},#{userSex},null,1)")
+	public int saveUser(User user);
 }

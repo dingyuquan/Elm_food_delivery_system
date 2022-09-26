@@ -17,5 +17,15 @@ public class UserController {
 	public User getUserByIdByPass(User user) throws Exception {
 		return userService.getUserByIdByPass(user);
 	}
+	
+	@RequestMapping("/getUserById")
+	public int getUserById(User user) throws Exception {
+		return userService.getUserById(user.getUserId());
+	}
+	
+	@RequestMapping("/saveUser")
+	public int saveUser(User user) throws Exception {
+		return userService.saveUser(user);
+	}
 
 }

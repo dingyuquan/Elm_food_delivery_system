@@ -22,5 +22,15 @@ public class CartController {
 	public int saveCart(Cart cart) throws Exception {
 		return cartService.saveCart(cart);
 	}
+	
+	@RequestMapping("/updateCart")
+	public int updateCart(Cart cart) throws Exception {
+		return cartService.updateCart(cart);
+	}
+	
+	@RequestMapping("/removeCart")
+	public int removeCart(Cart cart) throws Exception {
+		return cartService.removeCart(cart);
+	}
 
 }

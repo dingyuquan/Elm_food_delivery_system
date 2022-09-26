@@ -3,7 +3,7 @@
 
 		<!--header部分 -->
 		<header>
-			<p>商家信息</p>
+			<p>确认订单</p>
 		</header>
 
 		<!--订单信息部分 -->
@@ -14,7 +14,8 @@
 				<i class="fa fa-angle-right"></i>
 			</div>
 
-			<p>{{user.userName}}{{user.userSex | sexFilter}} {{user.userId}}</p>
+			<!--<p>{{user.userName}}{{user.userSex | sexFilter}} {{user.userId}}</p> -->
+			<p>{{deliveryaddress!=null?deliveryaddress.contactName:user.userName}}{{deliveryaddress!=null?deliveryaddress.contactSex:user.userSex | sexFilter}} {{deliveryaddress!=null?deliveryaddress.contactTel:user.userId}}</p>
 		</div>
 
 		<h3>{{business.businessName}}</h3>
@@ -98,7 +99,7 @@
 		},
 		methods:{
 			toUserAddress(){
-				this.$router.push({path:'/userAddress',businessId:this.businessId});
+				this.$router.push({path:'/userAddress',query:{businessId:this.businessId}});
 			},
 			toPayment(){
 				if(this.deliveryaddress==null){
