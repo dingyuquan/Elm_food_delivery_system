@@ -14,7 +14,8 @@
 				<i class="fa fa-angle-right"></i>
 			</div>
 
-			<p>{{user.userName}}{{user.userSex | sexFilter}} {{user.userId}}</p>
+			<!--<p>{{user.userName}}{{user.userSex | sexFilter}} {{user.userId}}</p> -->
+			<p>{{deliveryaddress!=null?deliveryaddress.contactName:user.userName}}{{deliveryaddress!=null?deliveryaddress.contactSex:user.userSex | sexFilter}} {{deliveryaddress!=null?deliveryaddress.contactTel:user.userId}}</p>
 		</div>
 
 		<h3>{{business.businessName}}</h3>
