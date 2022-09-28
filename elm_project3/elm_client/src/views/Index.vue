@@ -149,11 +149,11 @@
 				</div>
 			</li>
 			<li>
-				<img src="../assets/sj01.png">
+				<img src="../assets/sj02.jpg">
 				<div class="business-info">
 					<!--头部-->
 					<div class="business-info-h">
-						<h3>会飞的炸鸡（天津大学店）</h3>
+						<h3>东寒家饺子（南开大学店）</h3>
 						<div class="business-info-like">&#8226;</div>
 					</div>
 					<!--星级评价-->
@@ -164,20 +164,20 @@
 							<i class="fa fa-star"></i>
 							<i class="fa fa-star"></i>
 							<i class="fa fa-star"></i>
-							<p>4.9 月售400+</p>
+							<p>5.0 月售500+</p>
 						</div>
 						<div class="business-info-star-right">
-							蜂鸟专送
+							饿了么专送
 						</div>
 					</div>
 					<!--起送配送部分-->
 					<div class="business-info-delivery">
-						<p>&#165;20起送 | &#165;4配送</p>
-						<p>1.3km | 38分钟</p>
+						<p>&#165;25起送 | &#165;3配送</p>
+						<p>1.6km | 30分钟</p>
 					</div>
 					<!--商家简介-->
 					<div class="business-info-explain">
-						<div>"童子炸鸡-烧烤#可以不错的"</div>
+						<div>"鲜肉饺子#肉馅饱满"</div>
 					</div>
 					<!--新品优惠部分-->
 					<div class="business-info-promotion">
@@ -186,7 +186,7 @@
 							<p>饿了么新用户首单立减9元</p>
 						</div>
 						<div class="business-info-promotion-right">
-							<p>2个活动</p>
+							<p>4个活动</p>
 							<i class="fa fa-caret-down"></i>
 						</div>
 					</div>
@@ -194,7 +194,58 @@
 					<div class="business-info-promotion">
 						<div class="business-info-promotion-left">
 							<div class="business-info-promotion-left-icon" style="background-color: #F1884F;">特</div>
-							<p>特价商品5元起</p>
+							<p>特价商品3元起</p>
+						</div>
+					</div>
+				</div>
+			</li>
+			<li>
+				<img src="../assets/sj03.jpg">
+				<div class="business-info">
+					<!--头部-->
+					<div class="business-info-h">
+						<h3>川锦汇麻辣烫（海棠街店）</h3>
+						<div class="business-info-like">&#8226;</div>
+					</div>
+					<!--星级评价-->
+					<div class="business-info-star">
+						<div class="business-info-star-left">
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<p>5.0 月售200+</p>
+						</div>
+						<div class="business-info-star-right">
+							饿了么专送
+						</div>
+					</div>
+					<!--起送配送部分-->
+					<div class="business-info-delivery">
+						<p>&#165;10起送 | &#165;5配送</p>
+						<p>500m | 10分钟</p>
+					</div>
+					<!--商家简介-->
+					<div class="business-info-explain">
+						<div>"麻辣烫#川香麻辣"</div>
+					</div>
+					<!--新品优惠部分-->
+					<div class="business-info-promotion">
+						<div class="business-info-promotion-left">
+							<div class="business-info-promotion-left-icon">新</div>
+							<p>饿了么新用户首单立减9元</p>
+						</div>
+						<div class="business-info-promotion-right">
+							<p>4个活动</p>
+							<i class="fa fa-caret-down"></i>
+						</div>
+					</div>
+					<!--特价优惠部分-->
+					<div class="business-info-promotion">
+						<div class="business-info-promotion-left">
+							<div class="business-info-promotion-left-icon" style="background-color: #F1884F;">特</div>
+							<p>特价商品3元起</p>
 						</div>
 					</div>
 				</div>
