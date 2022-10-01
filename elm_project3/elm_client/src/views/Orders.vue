@@ -103,7 +103,11 @@
 			},
 			toPayment(){
 				if(this.deliveryaddress==null){
-					alert('请选择送货地址！');
+					this.$message({
+						message: "请选择送货地址！",
+						type: 'warning',
+						duration: 1500
+					});
 					return;
 				}
 				this.$axios.post('OrdersController/createOrders', this.$qs.stringify({
@@ -116,7 +120,11 @@
 					if(orderId>0){
 						this.$router.push({path:'/payment',query:{orderId:orderId}});
 					}else{
-						alert('创建订单失败！');
+						this.$message({
+							message: "创建订单失败！",
+							type: 'error',
+							duration: 1500
+						});
 					}
 				}).catch(error=>{
 					console.error(error);

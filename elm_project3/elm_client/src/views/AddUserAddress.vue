@@ -74,15 +74,27 @@
 		methods: {
 			addUserAddress() {
 				if(this.deliveryAddress.contactName==''){
-					alert('联系人姓名不能为空！');
+					this.$message({
+						message: "联系人姓名不能为空！",
+						type: 'warning',
+						duration: 1500
+					});
 					return;
 				}
 				if(this.deliveryAddress.contactTel==''){
-					alert('联系人电话不能为空！');
+					this.$message({
+						message: "联系人电话不能为空！",
+						type: 'warning',
+						duration: 1500
+					});
 					return;
 				}
 				if(this.deliveryAddress.address==''){
-					alert('联系人地址不能为空！');
+					this.$message({
+						message: "联系人地址不能为空！",
+						type: 'warning',
+						duration: 1500
+					});
 					return;
 				}
 				this.deliveryAddress.userId = this.user.userId;
@@ -97,7 +109,11 @@
 							}
 						});
 					}else{
-						alert('新增地址失败！');
+						this.$message({
+						message: "新增地址失败！",
+						type: 'error',
+						duration: 1500
+					});
 					}
 				}).catch(error => {
 					console.error(error);

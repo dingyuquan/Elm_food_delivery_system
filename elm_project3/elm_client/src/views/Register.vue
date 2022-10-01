@@ -79,7 +79,11 @@
 				})).then(response => {
 					if(response.data==1){
 						this.user.userId = '';
-						alert('此手机号码已存在！');
+						this.$message({
+							message: "此手机号码已存在！",
+							type: 'warning',
+							duration: 1500
+						});
 					}
 				}).catch(error => {
 					console.error(error);

@@ -109,7 +109,11 @@
 						}
 						this.listDeliveryAddressByUserId();
 					} else {
-						alert('删除地址失败！');
+						this.$message({
+							message: "删除地址失败！",
+							type: 'error',
+							duration: 1500
+						});
 					}
 				}).catch(error => {
 					console.error(error);

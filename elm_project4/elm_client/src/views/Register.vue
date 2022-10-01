@@ -43,8 +43,8 @@
 					性别：
 				</div>
 				<div class="content" style="font-size: 3vw;">
-					<input type="radio" v-model="user.userSex" value="1" style="width:6vw;height: 3.2vw;">男
-					<input type="radio" v-model="user.userSex" value="0" style="width:6vw;height: 3.2vw;">女
+					<input type="radio" v-model="user.userSex" value="1" style="width:6vw;height: 3.2vw;vertical-align: middle;margin-top: -0.5px;margin-bottom: 1px;">男
+					<input type="radio" v-model="user.userSex" value="0" style="width:6vw;height: 3.2vw;vertical-align: middle;margin-top: -0.5px;margin-bottom: 1px;">女
 				</div>
 			</li>
 		</ul>
@@ -79,27 +79,58 @@
 				})).then(response => {
 					if(response.data==1){
 						this.user.userId = '';
-						alert('此手机号码已存在！');
+						this.$message({
+							message: "此手机号码已存在！",
+							type: 'warning',
+							duration: 1500
+						});
 					}
 				}).catch(error => {
 					console.error(error);
 				});
 			},
 			register() {
+				const reg = /^[1][3,4,5,6,7,8,9][0-9]{9}$/;
 				if (this.user.userId == '') {
-					alert('手机号不能为空!');
+					this.imgShow = false;
+					this.$message({
+						message: "手机号不能为空！",
+						type: 'warning',
+						duration: 1500
+					});
+					return;
+				}
+				if (this.user.userId.length != 11 || !reg.test(this.user.userId)) {
+					this.imgShow = false;
+					this.$message({
+						message: "请填写正确的手机号！",
+						type: 'warning',
+						duration: 1500
+					});
 					return;
 				}
 				if (this.user.password == '') {
-					alert('密码不能为空!');
+					this.$message({
+						message: "密码不能为空!",
+						type: 'warning',
+						duration: 1500
+					});
 					return;
 				}
 				if (this.user.password != this.confirmPassword) {
-					alert('两次输入的密码不一致！');
+					this.$message({
+						message: "两次输入的密码不一致！",
+						type: 'warning',
+						duration: 1500
+					});
 					return;
 				}
 				if (this.user.userName == '') {
-					alert('用户名不能为空!');
+					this.$message({
+						message: "用户名不能为空!",
+						type: 'warning',
+						duration: 1500
+					});
 					return;
 				}
 
@@ -108,11 +139,15 @@
 					this.user
 				)).then(response => {
 					if(response.data > 0){
-						alert('注册成功！');
+						this.$message({
+							message: "注册成功！",
+							type: 'success',
+							duration: 1500
+						});
 						//表示回退
 						this.$router.go(-1);
 					}else{
-						alert('注册失败！');
+						this.$message.error('注册失败！');
 					}
 				}).catch(error => {
 					console.error(error);

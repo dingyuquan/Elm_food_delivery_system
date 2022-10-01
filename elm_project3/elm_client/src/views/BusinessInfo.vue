@@ -169,7 +169,11 @@
 						this.foodArr[index].quantity=1;
 						this.foodArr.sort();
 					}else{
-						alert('向购物车中添加食品失败！');
+						this.$message({
+							message: "向购物车中添加食品失败！",
+							type: 'error',
+							duration: 1500
+						});
 					}
 				}).catch(error => {
 					console.error(error);
@@ -187,7 +191,11 @@
 						this.foodArr[index].quantity+=num;
 						this.foodArr.sort();
 					}else{
-						alert('向购物车中更新食品失败！');
+						this.$message({
+							message: "向购物车中更新食品失败！",
+							type: 'error',
+							duration: 1500
+						});
 					}
 				}).catch(error => {
 					console.error(error);
@@ -204,7 +212,11 @@
 						this.foodArr[index].quantity=0;
 						this.foodArr.sort();
 					}else{
-						alert('从购物车中删除食品失败！');
+						this.$message({
+							message: "向购物车中删除食品失败！",
+							type: 'error',
+							duration: 1500
+						});
 					}
 				}).catch(error => {
 					console.error(error);

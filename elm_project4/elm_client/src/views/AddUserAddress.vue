@@ -19,8 +19,8 @@
 					性别：
 				</div>
 				<div class="content" style="font-size: 3vw;">
-					<input type="radio" v-model="deliveryAddress.contactSex" value="1" style="width:6vw;height:3.2vw;">男
-					<input type="radio" v-model="deliveryAddress.contactSex" value="0" style="width:6vw;height:3.2vw;">女
+					<input type="radio" v-model="deliveryAddress.contactSex" value="1" style="width:6vw;height:3.2vw;vertical-align: middle;margin-top: -0.5px;margin-bottom: 1px;">男
+					<input type="radio" v-model="deliveryAddress.contactSex" value="0" style="width:6vw;height:3.2vw;vertical-align: middle;margin-top: -0.5px;margin-bottom: 1px;">女
 				</div>
 			</li>
 			<li>
@@ -74,15 +74,27 @@
 		methods: {
 			addUserAddress() {
 				if(this.deliveryAddress.contactName==''){
-					alert('联系人姓名不能为空！');
+					this.$message({
+						message: "联系人姓名不能为空！",
+						type: 'warning',
+						duration: 1500
+					});
 					return;
 				}
 				if(this.deliveryAddress.contactTel==''){
-					alert('联系人电话不能为空！');
+					this.$message({
+						message: "联系人电话不能为空！",
+						type: 'warning',
+						duration: 1500
+					});
 					return;
 				}
 				if(this.deliveryAddress.address==''){
-					alert('联系人地址不能为空！');
+					this.$message({
+						message: "联系人地址不能为空！",
+						type: 'warning',
+						duration: 1500
+					});
 					return;
 				}
 				this.deliveryAddress.userId = this.user.userId;
@@ -97,7 +109,11 @@
 							}
 						});
 					}else{
-						alert('新增地址失败！');
+						this.$message({
+							message: "新增地址失败！",
+							type: 'error',
+							duration: 1500
+						});
 					}
 				}).catch(error => {
 					console.error(error);

@@ -1,6 +1,10 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
+// 引入模块
+import ElementUI from '../node_modules/element-ui'
+// 引入样式
+import '../node_modules/element-ui/lib/theme-chalk/index.css'
 
 import 'font-awesome/css/font-awesome.min.css'
 import axios from 'axios'
@@ -15,7 +19,7 @@ import {
 	removeLocalStorage
 } from './common.js'
 
-
+Vue.use(ElementUI);
 Vue.config.productionTip = false
 
 // 设置axios的基础url部分
