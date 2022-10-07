@@ -84,7 +84,7 @@
 					password:this.password
 				})).then(response => {
 					let user = response.data;
-					if(user==null){
+					if(user==""){
 						this.$message.error('用户名或密码不正确!');
 					}else{
 						//防止数据溢出，不将用户头像放入setSessionStorage（setSessionStorage有容量限制）
