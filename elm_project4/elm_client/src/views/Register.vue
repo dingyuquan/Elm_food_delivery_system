@@ -43,8 +43,8 @@
 					性别：
 				</div>
 				<div class="content" style="font-size: 3vw;">
-					<input type="radio" v-model="user.userSex" value="1" style="width:6vw;height: 3.2vw;vertical-align: middle;margin-top: -0.5px;margin-bottom: 1px;">男
-					<input type="radio" v-model="user.userSex" value="0" style="width:6vw;height: 3.2vw;vertical-align: middle;margin-top: -0.5px;margin-bottom: 1px;">女
+					<input type="radio" v-model="user.userSex" value="1" style="width:6vw;height: 3.2vw;">男
+					<input type="radio" v-model="user.userSex" value="0" style="width:6vw;height: 3.2vw;">女
 				</div>
 			</li>
 		</ul>

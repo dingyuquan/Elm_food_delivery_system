@@ -3,7 +3,9 @@
 
 		<!--header部分 -->
 		<header>
-			<p>商家信息</p>
+			<div class="fa fa-angle-left" @click="backpage()"></div>
+			<div class="location-box"></div>
+			<div class="location-text">商家信息</div>
 		</header>
 
 		<!-- 商家logo部分 -->
@@ -213,7 +215,7 @@
 						this.foodArr.sort();
 					}else{
 						this.$message({
-							message: "从购物车中删除食品失败！",
+							message: "向购物车中删除食品失败！",
 							type: 'error',
 							duration: 1500
 						});
@@ -224,6 +226,9 @@
 			},
 			toOrder(){
 				this.$router.push({path:'/orders',query:{businessId:this.business.businessId}});
+			},
+			backpage(){
+				this.$router.go(-1);
 			}
 		},
 		computed:{
@@ -274,6 +279,23 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
+	}
+	
+	.wrapper header .location-box{
+		width: 33%;
+	}
+	
+	.wrapper header .location-text{
+		font-size: 4.8vw;
+		font-weight: 500;
+		color: #fff;
+		position:fixed;
+	}
+	
+	.wrapper header .fa-angle-left{
+		margin-left: -6cm;
+		font-weight: 700;
+		font-size: 0.8cm;
 	}
 
 

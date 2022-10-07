@@ -2,7 +2,9 @@
 	<div class="wrapper">
 		<!-- header部分 -->
 		<header>
-			<p>新增送货地址</p>
+			<div class="fa fa-angle-left" @click="backpage()"></div>
+			<div class="location-box"></div>
+			<div class="location-text">新增送货地址</div>
 		</header>
 		<!-- 表单部分 -->
 		<ul class="form-box">
@@ -19,8 +21,8 @@
 					性别：
 				</div>
 				<div class="content" style="font-size: 3vw;">
-					<input type="radio" v-model="deliveryAddress.contactSex" value="1" style="width:6vw;height:3.2vw;vertical-align: middle;margin-top: -0.5px;margin-bottom: 1px;">男
-					<input type="radio" v-model="deliveryAddress.contactSex" value="0" style="width:6vw;height:3.2vw;vertical-align: middle;margin-top: -0.5px;margin-bottom: 1px;">女
+					<input type="radio" v-model="deliveryAddress.contactSex" value="1" style="width:6vw;height:3.2vw;">男
+					<input type="radio" v-model="deliveryAddress.contactSex" value="0" style="width:6vw;height:3.2vw;">女
 				</div>
 			</li>
 			<li>
@@ -110,14 +112,17 @@
 						});
 					}else{
 						this.$message({
-							message: "新增地址失败！",
-							type: 'error',
-							duration: 1500
-						});
+						message: "新增地址失败！",
+						type: 'error',
+						duration: 1500
+					});
 					}
 				}).catch(error => {
 					console.error(error);
 				});
+			},
+			backpage(){
+				this.$router.go(-1);
 			}
 		}
 	}
@@ -145,6 +150,23 @@
 		top: 0;
 		/*保证在最上层*/
 		z-index: 1000;
+	}
+	
+	.wrapper header .location-box{
+		width: 33%;
+	}
+	
+	.wrapper header .location-text{
+		font-size: 4.8vw;
+		font-weight: 500;
+		color: #fff;
+		position:fixed;
+	}
+	
+	.wrapper header .fa-angle-left{
+		margin-left: -1.6cm;
+		font-weight: 700;
+		font-size: 0.8cm;
 	}
 
 	/*************** （表单信息） ***************/

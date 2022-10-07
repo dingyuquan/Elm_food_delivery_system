@@ -3,7 +3,9 @@
 
 		<!--header部分 -->
 		<header>
-			<p>在线支付</p>
+			<div class="fa fa-angle-left" @click="backpage()"></div>
+			<div class="location-box"></div>
+			<div class="location-text">在线支付</div>
 		</header>
 
 		<!-- 订单信息部分 -->
@@ -86,6 +88,9 @@
 		methods:{
 			detailetShow(){
 				this.isShowDetailet = !this.isShowDetailet;
+			},
+			backpage(){
+				this.$router.go(-1);
 			}
 		},
 		components: {
@@ -117,6 +122,22 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
+	}
+	
+	.wrapper header .location-box{
+		width: 33%;
+	}
+	
+	.wrapper header .location-text{
+		font-size: 4.8vw;
+		font-weight: 500;
+		color: #fff;
+	}
+	
+	.wrapper header .fa-angle-left{
+		margin-left: -4cm;
+		font-weight: 700;
+		font-size: 0.8cm;
 	}
 
 	/********************* 订单信息 *************************/

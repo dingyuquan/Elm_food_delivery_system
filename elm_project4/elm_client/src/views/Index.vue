@@ -260,11 +260,11 @@
 <script>
 	//导入共同组件
 	import Footer from '../components/Footer.vue';
-
+	
 	export default {
 		name: 'Index',
 		mounted() {
-			document.onscroll = () => {
+			document.onscroll = ()=> {
 				// 获取滚动条的位置
 				let s1 = document.documentElement.scrollTop;
 				let s2 = document.body.scrollTop;
@@ -287,17 +287,12 @@
 			// 切换到其他组件时，不需要document滚动条事件
 			document.onscroll = null;
 		},
-		components: {
+		components:{
 			Footer
 		},
-		methods: {
-			toBusinessList(orderTypeId) {
-				this.$router.push({
-					path: '/businessList',
-					query: {
-						orderTypeId: orderTypeId
-					}
-				});
+		methods:{
+			toBusinessList(orderTypeId){
+				this.$router.push({path:'/businessList',query:{orderTypeId:orderTypeId}});
 			}
 		}
 	}
@@ -672,4 +667,5 @@
 	.wrapper .business li .business-info .business-info-promotion .business-info-promotion-right p {
 		margin-right: 2vw;
 	}
+
 </style>

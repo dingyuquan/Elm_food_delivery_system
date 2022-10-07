@@ -2,7 +2,9 @@
 	<div class="wrapper">
 		<!-- header部分 -->
 		<header>
-			<p>编辑送货地址</p>
+			<div class="fa fa-angle-left" @click="backpage()"></div>
+			<div class="location-box"></div>
+			<div class="location-text">编辑送货地址</div>
 		</header>
 		<!-- 表单部分 -->
 		<ul class="form-box">
@@ -79,7 +81,7 @@
 			editUserAddress() {
 				if (this.deliveryAddress.contactName == '') {
 					this.$message({
-						message: "联系人姓名不能为空！！",
+						message: "联系人姓名不能为空！",
 						type: 'warning',
 						duration: 1500
 					});
@@ -95,7 +97,7 @@
 				}
 				if (this.deliveryAddress.address == '') {
 					this.$message({
-						message: "联系人地址不能为空！！",
+						message: "联系人地址不能为空！",
 						type: 'warning',
 						duration: 1500
 					});
@@ -121,6 +123,9 @@
 				}).catch(error => {
 					console.error(error);
 				});
+			},
+			backpage(){
+				this.$router.go(-1);
 			}
 		}
 	}
@@ -148,6 +153,23 @@
 		top: 0;
 		/*保证在最上层*/
 		z-index: 1000;
+	}
+	
+	.wrapper header .location-box{
+		width: 33%;
+	}
+	
+	.wrapper header .location-text{
+		font-size: 4.8vw;
+		font-weight: 500;
+		color: #fff;
+		position:fixed;
+	}
+	
+	.wrapper header .fa-angle-left{
+		margin-left: -1.6cm;
+		font-weight: 700;
+		font-size: 0.8cm;
 	}
 
 	/*************** （表单信息） ***************/

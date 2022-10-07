@@ -2,7 +2,9 @@
 	<div class="wrapper">
 		<!-- header部分 -->
 		<header>
-			<p>地址管理</p>
+			<div class="fa fa-angle-left" @click="backpage()"></div>
+			<div class="location-box"></div>
+			<div class="location-text">地址管理</div>
 		</header>
 		<!-- 地址列表部分 -->
 		<ul class="addresslist">
@@ -118,6 +120,9 @@
 				}).catch(error => {
 					console.error(error);
 				});
+			},
+			backpage(){
+				this.$router.go(-1);
 			}
 		}
 	}
@@ -146,6 +151,23 @@
 		top: 0;
 		/*保证在最上层*/
 		z-index: 1000;
+	}
+	
+	.wrapper header .location-box{
+		width: 33%;
+	}
+	
+	.wrapper header .location-text{
+		font-size: 4.8vw;
+		font-weight: 500;
+		color: #fff;
+		position:fixed;
+	}
+	
+	.wrapper header .fa-angle-left{
+		margin-left: -1.6cm;
+		font-weight: 700;
+		font-size: 0.8cm;
 	}
 
 	/*************** addresslist ***************/
