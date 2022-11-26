@@ -1,6 +1,9 @@
 package com.neusoft.elmboot.bo;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.neusoft.elmboot.entity.ScoreStoreEntity;
+import com.neusoft.elmboot.mapper.ScoreStoreMapper;
 
 public class ScoreStoreBO {
 	private Integer scorestoreId;
@@ -33,5 +36,15 @@ public class ScoreStoreBO {
 	}
 	
 	//方法
-	
+	//消费一定的积分
+	public int useScore(Integer num) {
+		if(score>num) {
+			this.score -= num;
+			return -1;
+		}else if(score == num){
+			return 0;
+		}else {
+			return num - score;
+		}
+	}
 }

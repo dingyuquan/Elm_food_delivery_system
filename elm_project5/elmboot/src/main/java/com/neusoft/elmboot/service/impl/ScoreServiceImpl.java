@@ -1,8 +1,13 @@
 package com.neusoft.elmboot.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.neusoft.elmboot.bo.ScoreBO;
+import com.neusoft.elmboot.bo.ScoreStoreBO;
 import com.neusoft.elmboot.entity.ScoreEntity;
 import com.neusoft.elmboot.entity.ScoreStoreEntity;
 import com.neusoft.elmboot.mapper.ScoreMapper;
@@ -31,6 +36,67 @@ public class ScoreServiceImpl implements ScoreService {
 		ScoreStoreEntity scoreStoreEntity = new ScoreStoreEntity(score);
 		scoreStoreMapper.saveScoreStore(scoreStoreEntity);
 		return scoreMapper.saveScore(score);
+	}
+
+	@Override
+	public int expendCredit(ScoreVO scoreVO) {
+		// TODO Auto-generated method stub
+		String userId = scoreVO.getUserId();
+		Integer credit = scoreVO.getCredit();
+		if(getCreditByUserId(userId)<credit)//如果积分不够，返回0，不进行任何操作
+			return 0;
+		
+		ScoreEntity score = new ScoreEntity();
+		score.setUserId(userId);
+		score.setCredit(-credit);
+		score.setCreateDate(CommonUtil.getCurrentDate());
+		//计算scorestore
+		List<ScoreStoreEntity> list = scoreStoreMapper.listScoreStoreByUserId(userId,CommonUtil.getCurrentDate());
+		List<ScoreStoreBO> scoreStores = new ArrayList<ScoreStoreBO>();
+		for(int i=0;i<list.size();i++)
+			scoreStores.add(new ScoreStoreBO(list.get(i)));
+		for(int i=0;i<scoreStores.size();i++) {
+			int left = scoreStores.get(i).useScore(credit);
+			
+			if(left == -1) {
+				//本条积分store够用，update
+				ScoreStoreEntity tmp = new ScoreStoreEntity();
+				tmp.setScorestoreId(scoreStores.get(i).getScorestoreId());
+				tmp.setScore(scoreStores.get(i).getScore());
+				scoreStoreMapper.updateScoreStore(tmp);
+				break;
+			}else if(left == 0){
+				//本条积分store正好用完，delete
+				scoreStoreMapper.removeScoreStore(scoreStores.get(i).getScorestoreId());
+				break;
+			}else {
+				//本条积分store不够用，delete，继续用下一个
+				scoreStoreMapper.removeScoreStore(scoreStores.get(i).getScorestoreId());
+				credit = left;
+			}
+		}
+		return scoreMapper.saveScore(score);
+	}
+
+	@Override
+	public int getCreditByUserId(String userId) {
+		// TODO Auto-generated method stub
+		String date = CommonUtil.getCurrentDate();
+		List<ScoreStoreEntity> list = scoreStoreMapper.listScoreStoreByUserId(userId, date);
+		int sum = 0;
+		for(int i=0;i<list.size();i++)
+			sum += list.get(i).getScore();
+		return sum;
+	}
+
+	@Override
+	public List<ScoreBO> listScoresByUserId(String userId) {
+		// TODO Auto-generated method stub
+		List<ScoreEntity> list = scoreMapper.listScoreByUserId(userId);
+		List<ScoreBO> res = new ArrayList<ScoreBO>();
+		for(int i=0;i<list.size();i++)
+			res.add(new ScoreBO(list.get(i)));
+		return res;
 	}
 	
 //	@Override

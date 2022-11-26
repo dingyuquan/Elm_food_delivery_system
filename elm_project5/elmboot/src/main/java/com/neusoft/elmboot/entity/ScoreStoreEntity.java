@@ -7,6 +7,8 @@ public class ScoreStoreEntity {
 	private Integer score;
 	private String expireDate;
 	
+	public ScoreStoreEntity() {}
+	
 	public ScoreStoreEntity(ScoreEntity score) {
 		this.userId = score.getUserId();
 		this.score = score.getCredit();
