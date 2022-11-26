@@ -3,11 +3,17 @@ package com.neusoft.elmboot.vo;
 import com.neusoft.elmboot.bo.ScoreBO;
 
 public class ScoreVO {
+	private String userId = "";
 	private Integer channelId = null;
 	private Integer eventId = null;
 	private Integer credit;
 	private String createDate;
 	private String expireDate;
+	private Integer time = null;
+	
+	public ScoreVO() {
+		
+	}
 	
 	public ScoreVO(ScoreBO s) {
 		this.credit = s.getCredit();
@@ -15,6 +21,22 @@ public class ScoreVO {
 		this.expireDate = s.getExpireDate();
 	}
 	
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public Integer getTime() {
+		return time;
+	}
+
+	public void setTime(Integer time) {
+		this.time = time;
+	}
+
 	public Integer getChannelId() {
 		return channelId;
 	}
