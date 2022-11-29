@@ -7,7 +7,14 @@ public class User {
 	private Integer userSex;
 	private String userImg;
 	private Integer delTag;
+	private Integer walletId;
 	
+	public Integer getWalletId() {
+		return walletId;
+	}
+	public void setWalletId(Integer walletId) {
+		this.walletId = walletId;
+	}
 	public String getUserId() {
 		return userId;
 	}

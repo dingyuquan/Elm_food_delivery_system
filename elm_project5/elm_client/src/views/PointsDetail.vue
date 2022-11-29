@@ -12,8 +12,8 @@
                 <el-tab-pane :stretch=true label=" 获取积分明细 " name="first">
                     <ul v-for="item in gainScoreDetailArr">
                         <div class="pointsDetail-left">
-                            <p v-if="item.channelId==1">注册获取</p>
-							<p v-if="item.channelId==2">支付获取</p>
+                            <p v-if="item.channelId==1">支付获取</p>
+							<p v-if="item.channelId==2">注册获取</p>
 							<p v-if="item.channelId==null">获取积分</p>
                             <div class="time">
 								<p>获取时间：{{item.createDate}}</p>

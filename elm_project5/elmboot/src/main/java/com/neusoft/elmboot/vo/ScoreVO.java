@@ -1,6 +1,8 @@
 package com.neusoft.elmboot.vo;
 
 import com.neusoft.elmboot.bo.ScoreBO;
+import com.neusoft.elmboot.strategy.ValidTimeStrategy;
+import com.neusoft.elmboot.strategy.ValidTimeStrategy1;
 
 public class ScoreVO {
 	private String userId = "";
@@ -9,7 +11,9 @@ public class ScoreVO {
 	private Integer credit;
 	private String createDate;
 	private String expireDate;
-	private Integer time = null;
+	
+	ValidTimeStrategy validTimeStrategy = new ValidTimeStrategy1();
+	private Integer time = validTimeStrategy.validTime();
 	
 	public ScoreVO() {
 		

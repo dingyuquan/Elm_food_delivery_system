@@ -72,7 +72,8 @@
 						if(score>this.credit){
 							this.$message({
 							    type: 'warning',
-							    message: '积分不足!'
+							    message: '积分不足!',
+								duration: 1500
 							});
 						}else{
 							this.$axios.post('ScoreController/expendCredit', this.$qs.stringify({
@@ -84,7 +85,8 @@
 								if(res > 0){
 									this.$message({
 									    type: 'success',
-									    message: '兑换成功!'
+									    message: '兑换成功!',
+										duration: 1500
 									});
 								}
 							}).catch(error => {
@@ -93,7 +95,8 @@
 						}
                     }).catch(() => {
                         this.$message({
-                            message: '已取消'
+                            message: '已取消',
+							duration: 1500
                         });          
                 });
             }

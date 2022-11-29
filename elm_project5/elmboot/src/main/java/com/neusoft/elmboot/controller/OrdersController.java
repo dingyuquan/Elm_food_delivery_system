@@ -31,4 +31,18 @@ public class OrdersController {
 		return ordersService.listOrdersByUserId(orders.getUserId());
 	}
 	
+	@RequestMapping("/payOrdersUsingScore")
+	public int payOrdersUsingScore(Integer orderId) throws Exception{
+		return ordersService.payOrdersUsingScore(orderId);
+	}
+	
+	@RequestMapping("/payOrders")
+	public int payOrders(Integer orderId) throws Exception{
+		return ordersService.payOrders(orderId);
+	}
+	
+	@RequestMapping("/showDeductionAmount")
+	public List<String> showDeductionAmount(Integer orderId) throws Exception{
+		return ordersService.showDeductionAmount(orderId);
+	}
 }

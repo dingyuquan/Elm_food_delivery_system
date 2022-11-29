@@ -30,6 +30,7 @@ public class ScoreServiceImpl implements ScoreService {
 		ScoreEntity score = new ScoreEntity();
 		score.setUserId(scoreVO.getUserId());
 		score.setCredit(scoreVO.getCredit());
+		score.setChannelId(scoreVO.getChannelId());
 		score.setCreateDate(CommonUtil.getCurrentDate());
 		//计算过期时间
 		score.setExpireDate(CommonUtil.getNextData(scoreVO.getTime()));

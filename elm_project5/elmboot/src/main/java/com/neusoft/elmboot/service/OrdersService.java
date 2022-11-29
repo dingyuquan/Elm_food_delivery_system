@@ -8,5 +8,8 @@ public interface OrdersService {
 
 	public int createOrders(Orders orders);
 	public Orders getOrdersById(Integer orderId);
+	public int payOrdersUsingScore(Integer orderId);
 	public List<Orders> listOrdersByUserId(String userId);
+	public int payOrders(Integer orderId);
+	public List<String> showDeductionAmount(Integer orderId);
 }

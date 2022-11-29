@@ -12,7 +12,7 @@
 			<!--我的余额-->
 			<div class="myBalance">
 				<div class="myBalance-h">我的余额（元）</div>
-				<p>100.00</p>
+				<p>{{this.balance.toFixed(2)}}</p>
 			</div>
 			<!--充值提现-->
 			<div class="recharge-withdraw">
@@ -26,7 +26,7 @@
 						<el-input v-model="rechargeInput" placeholder="￥0.00"></el-input>
 						<span slot="footer" class="dialog-footer">
 							<el-button @click="rechargeDialog = false">取 消</el-button>
-							<el-button type="primary" @click="rechargeDialog = false">确 定</el-button>
+							<el-button type="primary" @click="recharge()">确 定</el-button>
 						</span>
 					</el-dialog>
 				</div>
@@ -40,7 +40,7 @@
 						<el-input v-model="withdrawInput" placeholder="￥0.00"></el-input>
 						<span slot="footer" class="dialog-footer">
 							<el-button @click="withdrawDialog = false">取 消</el-button>
-							<el-button type="primary" @click="withdrawDialog = false">确 定</el-button>
+							<el-button type="primary" @click="withdraw()">确 定</el-button>
 						</span>
 					</el-dialog>
 				</div>
@@ -53,15 +53,7 @@
 				<h4>余额明细</h4>
 				<p @click="toBalanceDetail()">查看全部 &gt;</p>
 			</div>
-			<div class="BalanceDetail-bottom">
-				<div class="BalanceDetail-bottom-left">
-					<p>余额支付</p>
-                    <div class="time">2022-11-12 12:00</div>
-				</div>
-				<div class="BalanceDetail-bottom-right">
-					<p>-0.50</p>
-				</div>
-			</div>
+			
 		</div>
 
     </div>
@@ -75,12 +67,13 @@
 				rechargeDialog: false,
 				withdrawDialog: false,
 				rechargeInput: '',
-				withdrawInput: ''
+				withdrawInput: '',
+				balance: 0
 			}
 		},
 		created(){
 			this.user = this.$getSessionStorage('user');
-			this.$axios.post('VirtualWalletController/getBalanceByWalletId', this.$qs.stringify({
+			this.$axios.post('VirtualWalletController/getBalanceByUserId', this.$qs.stringify({
 				userId: this.user.userId
 			})).then(response => {
 				this.balance = response.data;
@@ -94,7 +87,71 @@
 			},
             toBalanceDetail(){
                 this.$router.push({path:'/balanceDetail'});
-            }
+            },
+			recharge(){
+				this.$axios.post('VirtualWalletController/cashinByWalletId', this.$qs.stringify({
+					userId: this.user.userId,
+					amount: this.rechargeInput
+				})).then(response => {
+					let res = response.data;
+					if(res == 1){
+						this.$message({
+							message: '充值成功！',
+							type: 'success',
+							duration: 1500
+						});
+						this.$axios.post('VirtualWalletController/getBalanceByUserId', this.$qs.stringify({
+							userId: this.user.userId
+						})).then(response => {
+							this.balance = response.data;
+						}).catch(error => {
+							console.error(error);
+						});
+						this.rechargeDialog = false;
+					}else{
+						this.$message({
+							message: '充值失败！',
+							type: 'error',
+							duration: 1500
+						});
+						this.rechargeDialog = false;
+					}
+				}).catch(error => {
+					console.error(error);
+				});
+			},
+			withdraw(){
+				this.$axios.post('VirtualWalletController/cashoutByWalletId', this.$qs.stringify({
+					userId: this.user.userId,
+					amount: this.withdrawInput
+				})).then(response => {
+					let res = response.data;
+					if(res == 1){
+						this.$message({
+							message: '提现成功！',
+							type: 'success',
+							duration: 1500
+						});
+						this.$axios.post('VirtualWalletController/getBalanceByUserId', this.$qs.stringify({
+							userId: this.user.userId
+						})).then(response => {
+							this.balance = response.data;
+						}).catch(error => {
+							console.error(error);
+						});
+						this.withdrawDialog = false;
+					}else{
+						this.$message({
+							message: '提现失败！',
+							type: 'error',
+							duration: 1500
+						});
+						this.withdrawDialog = false;
+					}
+				}).catch(error => {
+					console.error(error);
+				});
+			}
         }
 	}
 </script>
@@ -196,7 +253,7 @@
 	/********************* 余额明细 *************************/
 	.wrapper .BalanceDetail{
 		width: 92%;
-		height: 28vw;
+		height: 15vw;
 		border-radius: 8px;
 		margin: 0 auto;
 		background-color: #c6d8e542;
@@ -223,37 +280,5 @@
 		font-size: 4.3vw;
 		color: rgb(95, 94, 94);
 		cursor: pointer;
-	}
-	.wrapper .BalanceDetail .BalanceDetail-bottom{
-		width: 100%;
-		height: 14vw;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
-	.wrapper .BalanceDetail .BalanceDetail-bottom .BalanceDetail-bottom-left{
-		width: 100%;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		margin-top: 2vw;
-		margin-left: 4vw;
-	}
-	.wrapper .BalanceDetail .BalanceDetail-bottom .BalanceDetail-bottom-left p{
-        font-size:4.5vw;
-    }
-    .wrapper .BalanceDetail .BalanceDetail-bottom .BalanceDetail-bottom-left .time{
-        font-size: 4vw;
-        color: #888;
-        margin-top: 1.5vw;
-    }
-	.wrapper .BalanceDetail .BalanceDetail-bottom .BalanceDetail-bottom-right{
-		width: 100%;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		margin-top: 2vw;
-		margin-left: 10vw;
-		font-size: 5vw;
 	}
 </style>

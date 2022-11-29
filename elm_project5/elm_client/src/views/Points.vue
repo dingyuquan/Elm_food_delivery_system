@@ -30,9 +30,6 @@
 				<h4>积分商城</h4>
 				<p @click="toPointShop()">去看看 &gt;</p>
 			</div>
-			<div class="PointShop-bottom">
-				<div>兑换商品</div>
-			</div>
 		</div>
     </div>
 </template>

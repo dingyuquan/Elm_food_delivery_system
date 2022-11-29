@@ -15,7 +15,7 @@
 				{{orders.business.businessName}}
 				<i class="fa fa-caret-down" @click="detailetShow"></i>
 			</p>
-			<p>&#165;{{orders.orderTotal - useScore*0.1}}</p>
+			<p>&#165;{{(orders.orderTotal - deductionAmout*flag).toFixed(2)}}</p>
 		</div>
 
 		<!-- 订单明细部分 -->
@@ -44,10 +44,10 @@
 				<img src="../assets/wechatpay.png">
 			</li> -->
 			<p style="margin:3vw auto 2vw 3vw; font-size:4.3vw;">是否使用积分抵扣 :</p>
-			<input type="radio" v-model="usePoints" value="1" checked style="width:6vw;height: 3.2vw;" @click="pointsPaymentDialog=true">是
-			<input type="radio" v-model="usePoints" value="0" style="width:6vw;height: 3.2vw;">否
-			<p v-if="useScore>0" style="margin:3vw auto 2vw 3vw; font-size:4vw;">使用积分抵扣{{useScore*0.1}}元</p>
-			<el-dialog
+			<input type="radio" v-model="usePoints" value="1" checked style="width:6vw;height: 3.2vw;" @click="flag=1">是
+			<input type="radio" v-model="usePoints" value="0" style="width:6vw;height: 3.2vw;" @click="flag=0">否
+			<p style="margin:3vw auto 2vw 3vw; font-size:3.5vw;" >可使用{{resArr[0]}}积分抵扣{{deductionAmout.toFixed(2)}}元</p>
+<!-- 			<el-dialog
 				title="请输入积分抵扣金额"
 				:visible.sync="pointsPaymentDialog"
 				width="80%"
@@ -59,7 +59,7 @@
 					<el-button @click="pointsPaymentDialog = false">取 消</el-button>
 					<el-button type="primary" @click="useScores()">确 定</el-button>
 				</span>
-			</el-dialog>
+			</el-dialog> -->
 		</ul>
 		<div class="payment-button">
 			<button @click="payment()">确认支付</button>
@@ -87,7 +87,9 @@
 				usePoints: 0,
 				input: '',
 				score:0,
-				useScore:0
+				resArr:[],
+				flag:0,
+				deductionAmout:0
 			}
 		},
 		created() {
@@ -104,6 +106,15 @@
 			})).then(response => {
 				console.log(response.data);
 				this.score = response.data;
+			}).catch(error => {
+				console.error(error);
+			});
+			this.$axios.post('OrdersController/showDeductionAmount', this.$qs.stringify({
+				orderId: this.orderId
+			})).then(response => {
+				console.log(response.data);
+				this.resArr = response.data;
+				this.deductionAmout = Number(this.resArr[1]);
 			}).catch(error => {
 				console.error(error);
 			});
@@ -128,34 +139,73 @@
 				this.$router.go(-1);
 			},
 			payment(){
-				this.$message({
-					message: "支付成功",
-					type: 'success',
-					duration: 1500
-				});
-			},
-			useScores(){
-				console.log(this.input);
-				if(this.input*10 > this.score){
-					this.$message({
-						message: "积分不足",
-						type: 'warning',
-						duration: 1500
+				if(this.flag==0){
+					//不使用积分
+					this.$axios.post('OrdersController/payOrders', this.$qs.stringify({
+						orderId: this.orderId
+					})).then(response => {
+						if(response.data==1){
+							this.$message({
+								message: "支付成功",
+								type: 'success',
+								duration: 1500
+							});
+							this.$router.push({path:'/orderList'});
+						}else{
+							this.$message({
+								message: "余额不足",
+								type: 'error',
+								duration: 1500
+							});
+						}
+					}).catch(error => {
+						console.error(error);
 					});
-					return;
-				}
-				if(this.input > this.orders.orderTotal*0.2){
-					this.$message({
-						message: "超过抵扣额度",
-						type: 'warning',
-						duration: 1500
+				}else{
+					//使用积分
+					this.$axios.post('OrdersController/payOrdersUsingScore', this.$qs.stringify({
+						orderId: this.orderId
+					})).then(response => {
+						if(response.data==1){
+							this.$message({
+								message: "支付成功",
+								type: 'success',
+								duration: 1500
+							});
+							this.$router.push({path:'/orderList'});
+						}else{
+							this.$message({
+								message: "余额不足",
+								type: 'error',
+								duration: 1500
+							});
+						}
+					}).catch(error => {
+						console.error(error);
 					});
-					return;
 				}
-				this.useScore = this.input*10;
-				this.pointsPaymentDialog = false;
-				return;
 			}
+			// useScores(){
+			// 	console.log(this.input);
+			// 	if(this.input*10 > this.score){
+			// 		this.$message({
+			// 			message: "积分不足",
+			// 			type: 'warning',
+			// 			duration: 1500
+			// 		});
+			// 		return;
+			// 	}
+			// 	if(this.input > this.orders.orderTotal*0.2){
+			// 		this.$message({
+			// 			message: "超过抵扣额度",
+			// 			type: 'warning',
+			// 			duration: 1500
+			// 		});
+			// 		return;
+			// 	}
+			// 	this.pointsPaymentDialog = false;
+			// 	return;
+			// }
 		},
 		components: {
 			Footer

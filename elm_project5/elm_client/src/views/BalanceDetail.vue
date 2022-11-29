@@ -10,62 +10,39 @@
         <!-- 余额明细 -->
         <el-tabs class="balanceDtail" v-model="activeName" @tab-click="handleClick">
                 <el-tab-pane :stretch=true label="-- 全部 --" name="first">
-                    <ul>
+                    <ul v-for="item in detailArr">
                         <div class="BalanceDetail-left">
-                            <p>余额支付</p>
-                            <div class="time">2022-11-12 12:00</div>
+                            <p v-if="item.transactionType==0">支付</p>
+							<p v-if="item.transactionType==1">充值</p>
+							<p v-if="item.transactionType==2">提现</p>
+                            <div class="time">{{item.transactionDate}}</div>
                         </div>
                         <div class="BalanceDetail-right">
-                            <p>- 0.50</p>
-                        </div>
-                    </ul>
-                    <ul>
-                        <div class="BalanceDetail-left">
-                            <p>银行卡充值</p>
-                            <div class="time">2022-11-1 12:00</div>
-                        </div>
-                        <div class="BalanceDetail-right">
-                            <p>+ 20.00</p>
-                        </div>
-                    </ul>
-                    <ul>
-                        <div class="BalanceDetail-left">
-                            <p>余额支付</p>
-                            <div class="time">2022-11-12 12:00</div>
-                        </div>
-                        <div class="BalanceDetail-right">
-                            <p>- 0.50</p>
+                            <p v-if="item.transactionType==1">{{item.transactionAmount.toFixed(2)}}</p>
+							<p v-if="item.transactionType==0||item.transactionType==2">-{{item.transactionAmount.toFixed(2)}}</p>
                         </div>
                     </ul>
                 </el-tab-pane>
                 <el-tab-pane label="-- 收入 --" name="second">
-                    <ul>
+                    <ul v-for="item in detailArr" v-if="item.transactionType==1">
                         <div class="BalanceDetail-left">
-                            <p>银行卡充值</p>
-                            <div class="time">2022-11-1 12:00</div>
+                            <p>充值</p>
+                            <div class="time">{{item.transactionDate}}</div>
                         </div>
                         <div class="BalanceDetail-right">
-                            <p>+ 20.00</p>
+                            <p>{{item.transactionAmount.toFixed(2)}}</p>
                         </div>
                     </ul>
                 </el-tab-pane>
                 <el-tab-pane label="-- 支出 --" name="third">
-                    <ul>
+                    <ul v-for="item in detailArr" v-if="item.transactionType==0||item.transactionType==2">
                         <div class="BalanceDetail-left">
-                            <p>余额支付</p>
-                            <div class="time">2022-11-12 12:00</div>
+                            <p v-if="item.transactionType==0">支付</p>
+							<p v-if="item.transactionType==2">提现</p>
+                            <div class="time">{{item.transactionDate}}</div>
                         </div>
                         <div class="BalanceDetail-right">
-                            <p>- 0.50</p>
-                        </div>
-                    </ul>
-                    <ul>
-                        <div class="BalanceDetail-left">
-                            <p>余额支付</p>
-                            <div class="time">2022-11-12 12:00</div>
-                        </div>
-                        <div class="BalanceDetail-right">
-                            <p>- 0.50</p>
+                            <p>-{{item.transactionAmount.toFixed(2)}}</p>
                         </div>
                     </ul>
                 </el-tab-pane>
@@ -78,11 +55,19 @@
     export default{
         data() {
             return {
-                activeName: 'first'
+                activeName: 'first',
+				detailArr:[]
             };
         },
         created(){
-            
+            this.user = this.$getSessionStorage('user');
+            this.$axios.post('VirtualWalletController/getTransactionByUserId', this.$qs.stringify({
+            	userId: this.user.userId
+            })).then(response => {
+            	this.detailArr = response.data;
+            }).catch(error => {
+            	console.error(error);
+            });
         },
         methods:{
             backpage(){
