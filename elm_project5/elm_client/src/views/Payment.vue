@@ -15,7 +15,7 @@
 				{{orders.business.businessName}}
 				<i class="fa fa-caret-down" @click="detailetShow"></i>
 			</p>
-			<p>&#165;{{orders.orderTotal}}</p>
+			<p>&#165;{{orders.orderTotal - useScore*0.1}}</p>
 		</div>
 
 		<!-- 订单明细部分 -->
@@ -28,6 +28,10 @@
 				<p>配送费</p>
 				<p>&#165;{{orders.business.deliveryPrice}}</p>
 			</li>
+			<li>
+				<p>订单总额</p>
+				<p>&#165;{{orders.orderTotal}}</p>
+			</li>
 		</ul>
 
 		<!-- 支付方式部分 -->
@@ -39,18 +43,21 @@
 			<li>
 				<img src="../assets/wechatpay.png">
 			</li> -->
-			<p style="margin:3vw auto 2vw 3vw; font-size:4.5vw;">是否使用积分抵扣 :</p>
+			<p style="margin:3vw auto 2vw 3vw; font-size:4.3vw;">是否使用积分抵扣 :</p>
 			<input type="radio" v-model="usePoints" value="1" checked style="width:6vw;height: 3.2vw;" @click="pointsPaymentDialog=true">是
 			<input type="radio" v-model="usePoints" value="0" style="width:6vw;height: 3.2vw;">否
+			<p v-if="useScore>0" style="margin:3vw auto 2vw 3vw; font-size:4vw;">使用积分抵扣{{useScore*0.1}}元</p>
 			<el-dialog
 				title="请输入积分抵扣金额"
 				:visible.sync="pointsPaymentDialog"
 				width="80%"
 				center>
+				<p>当前积分余额：{{this.score}}</p>
+				<p>本订单最大可抵扣金额：{{(orders.orderTotal*0.2).toFixed(2)}}</p>
 				<el-input v-model="input" placeholder="￥0.00"></el-input>
 				<span slot="footer" class="dialog-footer">
 					<el-button @click="pointsPaymentDialog = false">取 消</el-button>
-					<el-button type="primary" @click="pointsPaymentDialog = false">确 定</el-button>
+					<el-button type="primary" @click="useScores()">确 定</el-button>
 				</span>
 			</el-dialog>
 		</ul>
@@ -78,14 +85,25 @@
 				isShowDetailet:true,
 				pointsPaymentDialog:false,
 				usePoints: 0,
-				input: ''
+				input: '',
+				score:0,
+				useScore:0
 			}
 		},
 		created() {
+			this.user = this.$getSessionStorage('user');
 			this.$axios.post('OrdersController/getOrdersById', this.$qs.stringify({
 				orderId: this.orderId
 			})).then(response => {
 				this.orders = response.data;
+			}).catch(error => {
+				console.error(error);
+			});
+			this.$axios.post('ScoreController/getCredit', this.$qs.stringify({
+				userId: this.user.userId
+			})).then(response => {
+				console.log(response.data);
+				this.score = response.data;
 			}).catch(error => {
 				console.error(error);
 			});
@@ -115,6 +133,28 @@
 					type: 'success',
 					duration: 1500
 				});
+			},
+			useScores(){
+				console.log(this.input);
+				if(this.input*10 > this.score){
+					this.$message({
+						message: "积分不足",
+						type: 'warning',
+						duration: 1500
+					});
+					return;
+				}
+				if(this.input > this.orders.orderTotal*0.2){
+					this.$message({
+						message: "超过抵扣额度",
+						type: 'warning',
+						duration: 1500
+					});
+					return;
+				}
+				this.useScore = this.input*10;
+				this.pointsPaymentDialog = false;
+				return;
 			}
 		},
 		components: {

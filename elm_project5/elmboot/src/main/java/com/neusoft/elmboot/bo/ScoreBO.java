@@ -13,6 +13,8 @@ public class ScoreBO {
 		this.credit = s.getCredit();
 		this.createDate = s.getCreateDate();
 		this.expireDate = s.getExpireDate();
+		this.channelId = s.getChannelId();
+		this.eventId = s.getEventId();
 	}
 	
 	public Integer getChannelId() {

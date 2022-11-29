@@ -9,55 +9,32 @@
 
         <!-- 积分明细 -->
         <el-tabs class="pointsDetail" v-model="activeName" @tab-click="handleClick">
-                <el-tab-pane :stretch=true label="-- 已获取 --" name="first">
-                    <ul>
+                <el-tab-pane :stretch=true label=" 获取积分明细 " name="first">
+                    <ul v-for="item in gainScoreDetailArr">
                         <div class="pointsDetail-left">
-                            <p>新用户注册</p>
-                            <div class="time">2022-11-12 12:00</div>
+                            <p v-if="item.channelId==1">注册获取</p>
+							<p v-if="item.channelId==2">支付获取</p>
+							<p v-if="item.channelId==null">获取积分</p>
+                            <div class="time">
+								<p>获取时间：{{item.createDate}}</p>
+								<p>过期时间：{{item.expireDate}}</p>
+							</div>
                         </div>
                         <div class="pointsDetail-right">
-                            <p>+ 200</p>
-                            <button>去使用</button>
-                        </div>
-                    </ul>
-                    <ul>
-                        <div class="pointsDetail-left">
-                            <p>外卖水果新客</p>
-                            <div class="time">2022-11-12 12:00</div>
-                        </div>
-                        <div class="pointsDetail-right">
-                            <p>+ 50</p>
-                            <button>去使用</button>
-                        </div>
-                    </ul>
-                    <ul>
-                        <div class="pointsDetail-left">
-                            <p>外卖水果新客</p>
-                            <div class="time">2022-11-12 12:00</div>
-                        </div>
-                        <div class="pointsDetail-right">
-                            <p>+ 50</p>
-                            <button>去使用</button>
+                            <p>{{item.credit}}</p>
                         </div>
                     </ul>
                 </el-tab-pane>
-                <el-tab-pane label="-- 已使用 --" name="second">
-                    <ul>
+                <el-tab-pane label=" 使用积分明细 " name="second">
+                    <ul v-for="item in useScoreDetailArr">
                         <div class="pointsDetail-left">
-                            <p>积分支付</p>
-                            <div class="time">2022-11-12 12:00</div>
+                            <p v-if="item.channelId==3">订单抵扣</p>
+                            <p v-if="item.channelId==4">兑换礼品</p>
+							<p v-if="item.channelId==null">花费积分</p>
+                            <div class="time">{{item.createDate}}</div>
                         </div>
                         <div class="pointsDetail-right">
-                            <p>- 0.50</p>
-                        </div>
-                    </ul>
-                    <ul>
-                        <div class="pointsDetail-left">
-                            <p>积分支付</p>
-                            <div class="time">2022-11-12 12:00</div>
-                        </div>
-                        <div class="pointsDetail-right">
-                            <p>- 0.50</p>
+                            <p>{{item.credit}}</p>
                         </div>
                     </ul>
                 </el-tab-pane>
@@ -70,11 +47,29 @@
     export default{
         data() {
             return {
-                activeName: 'first'
+                activeName: 'first',
+				gainScoreDetailArr:[],
+				useScoreDetailArr:[]
             };
         },
         created(){
-            
+            this.user = this.$getSessionStorage('user');
+            this.$axios.post('ScoreController/listGainLog', this.$qs.stringify({
+            	userId: this.user.userId
+            })).then(response => {
+            	console.log(response.data);
+            	this.gainScoreDetailArr = response.data;
+            }).catch(error => {
+            	console.error(error);
+            });
+			this.$axios.post('ScoreController/listUseLog', this.$qs.stringify({
+				userId: this.user.userId
+			})).then(response => {
+				console.log(response.data);
+				this.useScoreDetailArr = response.data;
+			}).catch(error => {
+				console.error(error);
+			});
         },
         methods:{
             backpage(){
@@ -138,7 +133,7 @@
     }
     .wrapper .pointsDetail ul{
 		width: 94vw;
-        height: 20vw;
+        height: 24vw;
         margin-bottom: 2vw;
         border-radius: 8px;
 
@@ -149,7 +144,7 @@
         background-color: #c6d8e542;
 	}
 	.wrapper .pointsDetail .pointsDetail-left{
-		width: 65%;
+		width: 70%;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -159,27 +154,21 @@
         font-size:4.5vw;
     }
     .wrapper .pointsDetail .pointsDetail-left .time{
-        font-size: 4vw;
         color: #888;
         margin-top: 1.5vw;
     }
+	.wrapper .pointsDetail .pointsDetail-left .time p{
+		font-size: 3.5vw;
+	}
 	.wrapper .pointsDetail .pointsDetail-right{
-		width: 35%;
+		width: 30%;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
         align-items: center;
         margin-left: 3vw;
 	}
-    .wrapper .pointsDetail .pointsDetail-right button{
-        width: 15vw;
-        height: 7vw;
-        border: none;
-		outline: none;
-		border-radius: 4px;
-        background-color: #0099ff8a;
-		color: #fff;
-        font-size: 3.2vw;
-        margin-top: 1vw;
-    }
+	.wrapper .pointsDetail .pointsDetail-right p{
+		font-size: 5vw;
+	}
 </style>

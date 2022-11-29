@@ -23,7 +23,7 @@ Vue.use(ElementUI);
 Vue.config.productionTip = false
 
 // 设置axios的基础url部分
-axios.defaults.baseURL = 'http://localhost:8080/elm_server';
+axios.defaults.baseURL = 'http://localhost:8080/elm';
 // 将axios挂载到vue实例上，使用时可以this.$axios 
 Vue.prototype.$axios = axios;
 Vue.prototype.$qs = qs;

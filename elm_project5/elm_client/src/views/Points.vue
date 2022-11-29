@@ -12,7 +12,7 @@
 			<!--我的积分-->
 			<div class="myPoints">
 				<div class="myPoints-h">我的积分</div>
-				<p>10000</p>
+				<p>{{this.score.credit}}</p>
 			</div>
 		</div>
 
@@ -21,15 +21,6 @@
 			<div class="PointsDetail-h">
 				<h4>积分明细</h4>
 				<p @click="toPointsDetail()">查看全部 &gt;</p>
-			</div>
-			<div class="PointsDetail-bottom">
-				<div class="PointsDetail-bottom-left">
-					<p>积分支付</p>
-                    <div class="time">2022-11-12 12:00</div>
-				</div>
-				<div class="PointsDetail-bottom-right">
-					<p>-0.50</p>
-				</div>
 			</div>
 		</div>
 
@@ -48,6 +39,25 @@
 
 <script>
     export default{
+		name: 'Points',
+		data() {
+			return {
+				score:{
+					credit:0
+				}
+			}
+		},
+		created(){
+			this.user = this.$getSessionStorage('user');
+			this.$axios.post('ScoreController/getCredit', this.$qs.stringify({
+				userId: this.user.userId
+			})).then(response => {
+				console.log(response.data);
+				this.score.credit = response.data;
+			}).catch(error => {
+				console.error(error);
+			});
+		},
         methods:{
             backpage(){
 				this.$router.go(-1);
@@ -131,7 +141,7 @@
 	/********************* 积分明细 *************************/
 	.wrapper .PointsDetail{
 		width: 92%;
-		height: 28vw;
+		height: 20vw;
 		border-radius: 8px;
 		margin: 0 auto;
 		background-color: #c6d8e542;
@@ -158,38 +168,6 @@
 		font-size: 4.3vw;
 		color: rgb(95, 94, 94);
 		cursor: pointer;
-	}
-	.wrapper .PointsDetail .PointsDetail-bottom{
-		width: 100%;
-		height: 14vw;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
-	.wrapper .PointsDetail .PointsDetail-bottom .PointsDetail-bottom-left{
-		width: 100%;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		margin-top: 2vw;
-		margin-left: 4vw;
-	}
-	.wrapper .PointsDetail .PointsDetail-bottom .PointsDetail-bottom-left p{
-        font-size:4.5vw;
-    }
-    .wrapper .PointsDetail .PointsDetail-bottom .PointsDetail-bottom-left .time{
-        font-size: 4vw;
-        color: #888;
-        margin-top: 1.5vw;
-    }
-	.wrapper .PointsDetail .PointsDetail-bottom .PointsDetail-bottom-right{
-		width: 100%;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		margin-top: 2vw;
-		margin-left: 10vw;
-		font-size: 5vw;
 	}
 
 	/********************* 积分商城 *************************/

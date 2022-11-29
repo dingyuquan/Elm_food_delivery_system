@@ -14,25 +14,25 @@
                     <div class="presentPoints">80</div>
                 </div>
                 <div class="present-right">
-                    <button @click="exchange()">兑换</button>
+                    <button @click="exchange(80)">兑换</button>
                 </div>
 			</li>
             <li>
 				<div class="present-left">
-                    <p>卫生纸</p>
-                    <div class="presentPoints">80</div>
+                    <p>鼠标</p>
+                    <div class="presentPoints">60</div>
                 </div>
                 <div class="present-right">
-                    <button>兑换</button>
+                    <button @click="exchange(60)">兑换</button>
                 </div>
 			</li>
             <li>
 				<div class="present-left">
-                    <p>卫生纸</p>
-                    <div class="presentPoints">80</div>
+                    <p>笔记本电脑</p>
+                    <div class="presentPoints">50</div>
                 </div>
                 <div class="present-right">
-                    <button>兑换</button>
+                    <button @click="exchange(50)">兑换</button>
                 </div>
 			</li>
 		</ul>
@@ -41,20 +41,56 @@
 
 <script>
     export default {
+		data() {
+			return {
+				credit:0,
+			}
+		},
+		created(){
+			this.user = this.$getSessionStorage('user');
+			this.$axios.post('ScoreController/getCredit', this.$qs.stringify({
+				userId: this.user.userId
+			})).then(response => {
+				console.log(response.data);
+				this.credit = response.data;
+			}).catch(error => {
+				console.error(error);
+			});
+		},
         methods:{
             backpage(){
 				this.$router.go(-1);
 			},
-            exchange(){
+            exchange(score){
+				console.log(score);
                 this.$confirm('是否兑换该礼品?', '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
                     center: true
                     }).then(() => {
-                        this.$message({
-                            type: 'success',
-                            message: '兑换成功!'
-                        });
+						console.log(this.credit);
+						if(score>this.credit){
+							this.$message({
+							    type: 'warning',
+							    message: '积分不足!'
+							});
+						}else{
+							this.$axios.post('ScoreController/expendCredit', this.$qs.stringify({
+								userId: this.user.userId,
+								credit: score,
+								channelId: 3
+							})).then(response => {
+								let res = response.data;
+								if(res > 0){
+									this.$message({
+									    type: 'success',
+									    message: '兑换成功!'
+									});
+								}
+							}).catch(error => {
+								console.error(error);
+							});
+						}
                     }).catch(() => {
                         this.$message({
                             message: '已取消'

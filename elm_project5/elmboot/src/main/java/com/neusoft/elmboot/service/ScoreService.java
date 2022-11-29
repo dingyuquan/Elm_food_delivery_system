@@ -14,5 +14,7 @@ public interface ScoreService {
 	
 	public int getCreditByUserId(String userId);
 	
-	public List<ScoreBO> listScoresByUserId(String userId);
+	public List<ScoreBO> listGainScoresByUserId(String userId);
+	
+	public List<ScoreBO> listUseScoresByUserId(String userId);
 }

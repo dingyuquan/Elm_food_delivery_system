@@ -19,6 +19,8 @@ public class ScoreVO {
 		this.credit = s.getCredit();
 		this.createDate = s.getCreateDate();
 		this.expireDate = s.getExpireDate();
+		this.channelId = s.getChannelId();
+		this.eventId = s.getEventId();
 	}
 	
 	public String getUserId() {

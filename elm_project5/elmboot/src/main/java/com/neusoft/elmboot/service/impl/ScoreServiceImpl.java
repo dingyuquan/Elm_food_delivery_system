@@ -49,6 +49,7 @@ public class ScoreServiceImpl implements ScoreService {
 		ScoreEntity score = new ScoreEntity();
 		score.setUserId(userId);
 		score.setCredit(-credit);
+		score.setChannelId(scoreVO.getChannelId());
 		score.setCreateDate(CommonUtil.getCurrentDate());
 		//计算scorestore
 		List<ScoreStoreEntity> list = scoreStoreMapper.listScoreStoreByUserId(userId,CommonUtil.getCurrentDate());
@@ -90,9 +91,19 @@ public class ScoreServiceImpl implements ScoreService {
 	}
 
 	@Override
-	public List<ScoreBO> listScoresByUserId(String userId) {
+	public List<ScoreBO> listGainScoresByUserId(String userId) {
 		// TODO Auto-generated method stub
-		List<ScoreEntity> list = scoreMapper.listScoreByUserId(userId);
+		List<ScoreEntity> list = scoreMapper.listGainScoreByUserId(userId);
+		List<ScoreBO> res = new ArrayList<ScoreBO>();
+		for(int i=0;i<list.size();i++)
+			res.add(new ScoreBO(list.get(i)));
+		return res;
+	}
+	
+	@Override
+	public List<ScoreBO> listUseScoresByUserId(String userId) {
+		// TODO Auto-generated method stub
+		List<ScoreEntity> list = scoreMapper.listUseScoreByUserId(userId);
 		List<ScoreBO> res = new ArrayList<ScoreBO>();
 		for(int i=0;i<list.size();i++)
 			res.add(new ScoreBO(list.get(i)));

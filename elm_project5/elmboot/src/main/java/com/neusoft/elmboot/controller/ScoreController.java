@@ -33,9 +33,18 @@ public class ScoreController {
 		return scoreService.getCreditByUserId(scoreVO.getUserId());
 	}
 	
-	@RequestMapping("/listLog")
-	public List<ScoreVO> listLog(ScoreVO scoreVO) {
-		List<ScoreBO> list = scoreService.listScoresByUserId(scoreVO.getUserId());
+	@RequestMapping("/listGainLog")
+	public List<ScoreVO> listGainLog(ScoreVO scoreVO) {
+		List<ScoreBO> list = scoreService.listGainScoresByUserId(scoreVO.getUserId());
+		List<ScoreVO> log = new ArrayList<ScoreVO>();
+		for(int i=0;i<list.size();i++)
+			log.add(new ScoreVO(list.get(i)));
+		return log;
+	}
+	
+	@RequestMapping("/listUseLog")
+	public List<ScoreVO> listUseLog(ScoreVO scoreVO) {
+		List<ScoreBO> list = scoreService.listUseScoresByUserId(scoreVO.getUserId());
 		List<ScoreVO> log = new ArrayList<ScoreVO>();
 		for(int i=0;i<list.size();i++)
 			log.add(new ScoreVO(list.get(i)));
