@@ -11,6 +11,12 @@ import Payment from '../views/Payment.vue'
 import AddUserAddress from '../views/AddUserAddress.vue'
 import EditUserAddress from '../views/EditUserAddress.vue'
 import Register from '../views/Register.vue'
+import UserInfo from '../views/UserInfo.vue'
+import Balance from '../views/Balance.vue'
+import Points from '../views/Points.vue'
+import BalanceDetail from '../views/BalanceDetail.vue'
+import PointShop from '../views/PointShop.vue'
+import PointsDetail from '../views/PointsDetail.vue'
 
 Vue.use(VueRouter)
 
@@ -73,6 +79,36 @@ const routes = [{
 		path: '/register',
 		name: 'Register',
 		component: Register
+	},
+	{
+		path: '/userInfo',
+		name: 'UserInfo',
+		component: UserInfo
+	},
+	{
+		path: '/balance',
+		name: 'Balance',
+		component: Balance
+	},
+	{
+		path: '/points',
+		name: 'Points',
+		component: Points
+	},
+	{
+		path: '/balanceDetail',
+		name: 'BalanceDetail',
+		component: BalanceDetail
+	},
+	{
+		path: '/pointShop',
+		name: 'PointShop',
+		component: PointShop
+	},
+	{
+		path: '/pointsDetail',
+		name: 'PointsDetail',
+		component: PointsDetail
 	}
 ]
 

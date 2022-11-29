@@ -84,13 +84,13 @@
 					password:this.password
 				})).then(response => {
 					let user = response.data;
-					if(user==""){
+					if(user==null){
 						this.$message.error('用户名或密码不正确!');
 					}else{
 						//防止数据溢出，不将用户头像放入setSessionStorage（setSessionStorage有容量限制）
 						user.userImg='';
 						this.$setSessionStorage('user',user);
-						this.$router.go(-1);
+						this.$router.push({path:'userInfo'});
 					}
 				}).catch(error => {
 					console.error(error);

@@ -156,7 +156,7 @@
 	}
 	
 	.wrapper header .location-box{
-		width: 33%;
+		width: 28%;
 	}
 	
 	.wrapper header .location-text{

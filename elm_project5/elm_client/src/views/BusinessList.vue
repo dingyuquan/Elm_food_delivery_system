@@ -65,7 +65,7 @@
 					userId: this.user.userId,
 				})).then(response => {
 					let cartArr = response.data;
-					//遍历所有商家列表
+					//遍历所有食品列表
 					for(let businessItem of this.businessArr){
 						businessItem.quantity = 0;
 						for(let cartItem of cartArr){
@@ -115,7 +115,7 @@
 	}
 	
 	.wrapper header .location-box{
-		width: 33%;
+		width: 28%;
 	}
 	
 	.wrapper header .location-text{

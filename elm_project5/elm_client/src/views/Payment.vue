@@ -32,16 +32,30 @@
 
 		<!-- 支付方式部分 -->
 		<ul class="payment-type">
-			<li>
+			<!-- <li>
 				<img src="../assets/alipay.png">
 				<i class="fa fa-check-circle"></i>
 			</li>
 			<li>
 				<img src="../assets/wechatpay.png">
-			</li>
+			</li> -->
+			<p style="margin:3vw auto 2vw 3vw; font-size:4.5vw;">是否使用积分抵扣 :</p>
+			<input type="radio" v-model="usePoints" value="1" checked style="width:6vw;height: 3.2vw;" @click="pointsPaymentDialog=true">是
+			<input type="radio" v-model="usePoints" value="0" style="width:6vw;height: 3.2vw;">否
+			<el-dialog
+				title="请输入积分抵扣金额"
+				:visible.sync="pointsPaymentDialog"
+				width="80%"
+				center>
+				<el-input v-model="input" placeholder="￥0.00"></el-input>
+				<span slot="footer" class="dialog-footer">
+					<el-button @click="pointsPaymentDialog = false">取 消</el-button>
+					<el-button type="primary" @click="pointsPaymentDialog = false">确 定</el-button>
+				</span>
+			</el-dialog>
 		</ul>
 		<div class="payment-button">
-			<button>确认支付</button>
+			<button @click="payment()">确认支付</button>
 		</div>
 
 
@@ -61,7 +75,10 @@
 				orders: {
 					business:{}
 				},
-				isShowDetailet:false
+				isShowDetailet:true,
+				pointsPaymentDialog:false,
+				usePoints: 0,
+				input: ''
 			}
 		},
 		created() {
@@ -91,6 +108,13 @@
 			},
 			backpage(){
 				this.$router.go(-1);
+			},
+			payment(){
+				this.$message({
+					message: "支付成功",
+					type: 'success',
+					duration: 1500
+				});
 			}
 		},
 		components: {
@@ -125,7 +149,7 @@
 	}
 	
 	.wrapper header .location-box{
-		width: 33%;
+		width: 28%;
 	}
 	
 	.wrapper header .location-text{
