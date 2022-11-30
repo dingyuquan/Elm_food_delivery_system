@@ -116,6 +116,7 @@
 						});
 						this.rechargeDialog = false;
 					}
+					this.rechargeInput = '';
 				}).catch(error => {
 					console.error(error);
 				});
@@ -148,6 +149,7 @@
 						});
 						this.withdrawDialog = false;
 					}
+					this.withdrawInput = '';
 				}).catch(error => {
 					console.error(error);
 				});

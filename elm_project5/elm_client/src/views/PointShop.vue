@@ -35,6 +35,24 @@
                     <button @click="exchange(50)">兑换</button>
                 </div>
 			</li>
+			<li>
+				<div class="present-left">
+			        <p>篮球</p>
+			        <div class="presentPoints">25</div>
+			    </div>
+			    <div class="present-right">
+			        <button @click="exchange(25)">兑换</button>
+			    </div>
+			</li>
+			<li>
+				<div class="present-left">
+			        <p>水杯</p>
+			        <div class="presentPoints">1</div>
+			    </div>
+			    <div class="present-right">
+			        <button @click="exchange(1)">兑换</button>
+			    </div>
+			</li>
 		</ul>
     </div>
 </template>
@@ -73,20 +91,20 @@
 							this.$message({
 							    type: 'warning',
 							    message: '积分不足!',
-								duration: 1500
+								duration: 1000
 							});
 						}else{
 							this.$axios.post('ScoreController/expendCredit', this.$qs.stringify({
 								userId: this.user.userId,
 								credit: score,
-								channelId: 3
+								channelId: 4
 							})).then(response => {
 								let res = response.data;
 								if(res > 0){
 									this.$message({
 									    type: 'success',
 									    message: '兑换成功!',
-										duration: 1500
+										duration: 1000
 									});
 								}
 							}).catch(error => {
