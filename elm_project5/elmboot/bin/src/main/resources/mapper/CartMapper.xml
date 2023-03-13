@@ -25,5 +25,16 @@
  		</where>
  		order by cartId
  	</select>
+ 	
+ 	<delete id="removeCart" parameterType="Cart">
+ 		delete from cart
+ 		<where>
+ 			userId=#{userId} and businessId=#{businessId}
+ 			<if test="foodId!=null and foodId!=''">
+ 				and foodId=#{foodId}
+ 			</if>
+ 		</where>
+ 		
+ 	</delete>
  
 </mapper>
