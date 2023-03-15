@@ -44,10 +44,9 @@
 			this.user = this.$getSessionStorage('user');
 			
 			//根据orderTypeId查询商家信息
-			this.$axios.post('BusinessController/listBusinessByOrderTypeId', this.$qs.stringify({
-				orderTypeId: this.orderTypeId
-			})).then(response => {
-				this.businessArr = response.data;
+			let url = `http://localhost:10300/BusinessController/listBusinessByOrderTypeId/${this.orderTypeId}`;
+			this.$axios.get(url).then(response => {
+				this.businessArr = response.data.result;
 				//判断是否登录
 				if(this.user!=null){
 					this.listCart();
@@ -61,10 +60,9 @@
 		},
 		methods:{
 			listCart(){
-				this.$axios.post('CartController/listCart', this.$qs.stringify({
-					userId: this.user.userId,
-				})).then(response => {
-					let cartArr = response.data;
+				let url = `http://localhost:10400/CartController/listCart/${this.user.userId}`;
+				this.$axios.get(url).then(response => {
+					let cartArr = response.data.result;
 					//遍历所有食品列表
 					for(let businessItem of this.businessArr){
 						businessItem.quantity = 0;

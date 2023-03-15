@@ -54,6 +54,7 @@
         },
         created(){
             this.user = this.$getSessionStorage('user');
+			<!-- 此处需要改动 -->
             this.$axios.post('ScoreController/listGainLog', this.$qs.stringify({
             	userId: this.user.userId
             })).then(response => {
@@ -62,6 +63,7 @@
             }).catch(error => {
             	console.error(error);
             });
+			<!-- 此处需要改动 -->
 			this.$axios.post('ScoreController/listUseLog', this.$qs.stringify({
 				userId: this.user.userId
 			})).then(response => {

@@ -74,10 +74,9 @@
 		},
 		methods: {
 			checkUserId(){
-				this.$axios.post('UserController/getUserById', this.$qs.stringify({
-					userId: this.user.userId,
-				})).then(response => {
-					if(response.data==1){
+				let url = `http://localhost:10100/UserController/getUserById/${this.user.userId}`;
+				this.$axios.get(url).then(response => {
+					if(response.data.result==1){
 						this.user.userId = '';
 						this.$message({
 							message: "此手机号码已存在！",
@@ -135,10 +134,10 @@
 				}
 
 				//注册请求
-				this.$axios.post('UserController/saveUser', this.$qs.stringify(
-					this.user
-				)).then(response => {
-					if(response.data > 0){
+				// 此处与钱包积分相关, 若修改了后端的接口则需要修改此处
+				let url = `http://localhost:10100/UserController/saveUser/${this.user.userId}/${this.user.password}/${this.user.userName}/${this.user.userSex}`;
+				this.$axios.post(url).then(response => {
+					if(response.data.result > 0){
 						this.$message({
 							message: "注册成功！",
 							type: 'success',

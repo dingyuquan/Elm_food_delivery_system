@@ -1,0 +1,13 @@
+2023-3-15 韩宝骏
+1. cart_server中的po包下的Business类与businessserver不一样，可能是隐患
+2. userserver，cart_server，deliveryaddress_server，orders_server还未测试
+3. cart_server需要修改CartMapper.xml里的配置，视频没讲，已经改完，如果钱包积分也有用到mapper映射，也需要修改配置。
+4. user_server 和 orders_server耦合了钱包和积分系统，因此目前还没能完全运行，两者都只有ServiceImpl报错。
+5. orders_server中需要的部分策略方法已经加好了
+6. orders_server 的controller的最后三个接口，其在前端的对应部分都在payment.vue中，已做标记。
+7. orders_server 的controller的最后三个接口，即为需要解耦的方法，其service层对应部分调用了钱包积分。
+8. user_server 的 controller的saveUser接口，其在前端的对应部分在register.vue中，已做标记。
+9. user_server 的 controller的saveUser接口，即为需要解耦的方法，其service层对应部分调用了钱包积分。
+10. 钱包积分对应的前端接口的待修改部分，分布在payment.vue，balanceDetail.vue，balance.vue，points.vue,  pointsDetail,  pointShop中，已做标记。
+11. 每个微服务的 application.yml中的数据库密码记得改，我使用的数据库插件名称也在此文件中，而其版本在pom.xml中，记得统一版本。
+12. 后端几乎每个vue都已修改（或需要修改）。

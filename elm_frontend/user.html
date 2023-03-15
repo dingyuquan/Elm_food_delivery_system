@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href="framework/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="framework/reset.css" rel="stylesheet"> 
+  <title>用户主页</title>
+  <link rel="stylesheet" type="text/css" href="css/user.css">
+</head>
+<body>
+  <header>
+    <h2>网上书店</h2>
+  </header>
+  <main>
+    <h3>查找图书</h3>
+    <form>
+      <input type="text" placeholder="输入图书信息" >
+      <button type="submit">搜索</button>
+    </form>
+	<h3>分类</h3>
+    <div class="category-list">
+	  <a href="#" class="category">全部图书</a>
+      <a href="#" class="category">小说</a>
+      <a href="#" class="category">科普读物</a>
+      <a href="#" class="category">教育</a>
+      <!-- 在这里添加图书类别 -->
+    </div>
+    <div class="book-list">
+      <div class="book">
+        <img src="./img/time.jpg" alt="Book 1" height="150">
+        <h4>时间简史</h4>
+        <p>作者: 霍金</p>
+        <p>价格: 80元</p>
+      </div>
+      <div class="book">
+        <img src="./img/math.jpg" alt="Book 2" height="150">
+        <h4>高等数学</h4>
+        <p>作者: 天津大学数学系</p>
+        <p>价格: 60元</p>
+      </div>
+      <!-- 在这里添加图书 -->
+    </div>
+  </main>
+  <nav>
+    <ul>
+      <li><a href="#">主页</a></li>
+      <li><a href="#">我的订单</a></li>
+	  <li><a href="#">个人信息</a></li>
+    </ul>
+  </nav>
+  <footer>
+    <p>Copyright 2021 Online Bookstore</p>
+  </footer>
+</body>
+</html>

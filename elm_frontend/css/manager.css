@@ -1,0 +1,102 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+.cate {
+	height: 0;
+}
+
+.add {
+	float: right;
+	height: 40px;
+	width: 150px;
+	font-size: 17px;
+	color: black;
+	background-color: #add8e6;
+}
+
+header {
+  background-color: #f6fff8;
+  padding: 20px;
+  text-align: center;
+  height: 20px;
+}
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  background-color: #f6fff8;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  display: inline-block;
+}
+
+nav a {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: black;
+}
+
+main {
+padding: 20px;
+background-color: #f6fff8;
+}
+
+.book-list {
+display: flex;
+flex-wrap: wrap;
+background-color: #f6fff8;
+justify-content: space-between;
+}
+
+.book {
+width: 45%;
+margin: 5px;
+text-align: center;
+background-color: #f6fff8;
+}
+
+.book img {
+width: 100%;
+max-width: 150px;
+}
+
+.category-list {
+display: flex;
+flex-wrap: wrap;
+background-color: #f6fff8;
+}
+
+.category {
+padding: 10px;
+margin: 10px;
+background-color: #f6fff8;
+text-decoration: none;
+color: black;
+}
+
+form {
+display: flex;
+align-items: center;
+}
+
+form input[type="text"] {
+flex-grow: 1;
+padding: 10px;
+}
+
+form button[type="submit"] {
+padding: 10px 20px;
+background-color: #f6fff8;
+border: none;
+color: black;
+cursor: pointer;
+}

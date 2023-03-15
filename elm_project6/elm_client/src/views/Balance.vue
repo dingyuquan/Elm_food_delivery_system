@@ -73,6 +73,7 @@
 		},
 		created(){
 			this.user = this.$getSessionStorage('user');
+			<!-- 此处需要改动 -->
 			this.$axios.post('VirtualWalletController/getBalanceByUserId', this.$qs.stringify({
 				userId: this.user.userId
 			})).then(response => {
@@ -89,6 +90,7 @@
                 this.$router.push({path:'/balanceDetail'});
             },
 			recharge(){
+				<!-- 此处需要改动 -->
 				this.$axios.post('VirtualWalletController/cashinByWalletId', this.$qs.stringify({
 					userId: this.user.userId,
 					amount: this.rechargeInput
@@ -100,6 +102,7 @@
 							type: 'success',
 							duration: 1500
 						});
+						<!-- 此处需要改动 -->
 						this.$axios.post('VirtualWalletController/getBalanceByUserId', this.$qs.stringify({
 							userId: this.user.userId
 						})).then(response => {
@@ -122,6 +125,7 @@
 				});
 			},
 			withdraw(){
+				<!-- 此处需要改动 -->
 				this.$axios.post('VirtualWalletController/cashoutByWalletId', this.$qs.stringify({
 					userId: this.user.userId,
 					amount: this.withdrawInput
@@ -133,6 +137,7 @@
 							type: 'success',
 							duration: 1500
 						});
+						<!-- 此处需要改动 -->
 						this.$axios.post('VirtualWalletController/getBalanceByUserId', this.$qs.stringify({
 							userId: this.user.userId
 						})).then(response => {

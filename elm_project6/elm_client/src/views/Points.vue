@@ -46,6 +46,7 @@
 		},
 		created(){
 			this.user = this.$getSessionStorage('user');
+			<!-- 此处需要改动 -->
 			this.$axios.post('ScoreController/getCredit', this.$qs.stringify({
 				userId: this.user.userId
 			})).then(response => {

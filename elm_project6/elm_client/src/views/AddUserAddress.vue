@@ -99,11 +99,9 @@
 					});
 					return;
 				}
-				this.deliveryAddress.userId = this.user.userId;
-				this.$axios.post('DeliveryAddressController/saveDeliveryAddress', this.$qs.stringify(
-					this.deliveryAddress
-				)).then(response => {
-					if(response.data>0){
+				let url = `http://localhost:10500/DeliveryAddressController/saveDeliveryAddress/${this.deliveryAddress.contactName}/${this.deliveryAddress.contactSex}/${this.deliveryAddress.contactTel}/${this.deliveryAddress.address}/${this.user.userId}`;
+				this.$axios.post(url).then(response => {
+					if(response.data.result>0){
 						this.$router.push({
 							path: '/userAddress',
 							query: {

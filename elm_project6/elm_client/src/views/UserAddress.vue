@@ -58,11 +58,9 @@
 		methods: {
 			listDeliveryAddressByUserId() {
 				//查询送货地址
-
-				this.$axios.post('DeliveryAddressController/listDeliveryAddressByUserId', this.$qs.stringify({
-					userId: this.user.userId
-				})).then(response => {
-					this.deliveryAddressArr = response.data;
+				let url = `http://localhost:10500/DeliveryAddressController/listDeliveryAddressByUserId/${this.user.userId}`;
+				this.$axios.get(url).then(response => {
+					this.deliveryAddressArr = response.data.result;
 				}).catch(error => {
 					console.error(error);
 				});
@@ -99,11 +97,9 @@
 					return;
 				}
 
-
-				this.$axios.post('DeliveryAddressController/removeDeliveryAddress', this.$qs.stringify({
-					daId: daId
-				})).then(response => {
-					if (response.data > 0) {
+				let url = `http://localhost:10500/DeliveryAddressController/removeDeliveryAddress/${daId}`;
+				this.$axios.delete(url).then(response => {
+					if (response.data.result > 0) {
 						//判断删除的地址是否为LocalStorage中存储的地址
 						let deliveryAddress = this.$getLocalStorage(this.user.userId);
 						if (deliveryAddress != null && deliveryAddress.daId == daId) {
