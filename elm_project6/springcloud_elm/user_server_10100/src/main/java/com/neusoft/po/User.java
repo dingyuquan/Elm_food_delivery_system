@@ -9,6 +9,15 @@ public class User {
 	private Integer delTag;
 	private Integer walletId;
 	
+	private Integer createWalletResult;
+	
+	public Integer createWalletResult() {
+		return createWalletResult;
+	}
+	public void createWalletResult(Integer createWalletResult) {
+		this.createWalletResult = createWalletResult;
+	}
+	
 	public Integer getWalletId() {
 		return walletId;
 	}

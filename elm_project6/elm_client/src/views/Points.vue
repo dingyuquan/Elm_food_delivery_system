@@ -46,11 +46,10 @@
 		},
 		created(){
 			this.user = this.$getSessionStorage('user');
-			this.$axios.post('ScoreController/getCredit', this.$qs.stringify({
-				userId: this.user.userId
-			})).then(response => {
-				console.log(response.data);
-				this.score.credit = response.data;
+			let url = `http://localhost:30100/ScoreController/getCredit/${this.user.userId}`;
+			this.$axios.get(url).then(response => {
+				console.log(response.data.result);
+				this.score.credit = response.data.result;
 			}).catch(error => {
 				console.error(error);
 			});

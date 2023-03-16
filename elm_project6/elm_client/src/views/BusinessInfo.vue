@@ -84,19 +84,10 @@
 			this.user = this.$getSessionStorage('user');
 			
 			//根据businessId查询商家信息
-			this.$axios.post('BusinessController/getBusinessById', this.$qs.stringify({
-				businessId: this.businessId
-			})).then(response => {
-				this.business = response.data;
-			}).catch(error => {
-				console.error(error);
-			});
-
-			//根据businessId查询所属食品信息
-			this.$axios.post('FoodController/listFoodByBusinessId', this.$qs.stringify({
-				businessId: this.businessId
-			})).then(response => {
-				this.foodArr = response.data;
+			let url = `http://localhost:10300/BusinessController/getBusinessById/${this.businessId}`;
+			this.$axios.get(url).then(response => {
+				this.business = response.data.result;
+				this.foodArr = this.business.foodList;
 				for (let i = 0; i < this.foodArr.length; i++) {
 					this.foodArr[i].quantity = 0;
 				}
@@ -111,11 +102,9 @@
 		},
 		methods:{
 			listCart(){
-				this.$axios.post('CartController/listCart', this.$qs.stringify({
-					businessId: this.businessId,
-					userId: this.user.userId,
-				})).then(response => {
-					let cartArr = response.data;
+				let url = `http://localhost:10400/CartController/listCart/${this.user.userId}/${this.businessId}`;
+				this.$axios.get(url).then(response => {
+					let cartArr = response.data.result;
 					//遍历所有食品列表
 					for(let foodItem of this.foodArr){
 						foodItem.quantity = 0;
@@ -161,12 +150,9 @@
 				}
 			},
 			saveCart(index){
-				this.$axios.post('CartController/saveCart', this.$qs.stringify({
-					businessId: this.businessId,
-					userId: this.user.userId,
-					foodId: this.foodArr[index].foodId
-				})).then(response => {
-					if(response.data==1){
+				let url = `http://localhost:10400/CartController/saveCart/${this.user.userId}/${this.businessId}/${this.foodArr[index].foodId}`;
+				this.$axios.post(url).then(response => {
+					if(response.data.result==1){
 						//此食品数量要更新为1：
 						this.foodArr[index].quantity=1;
 						this.foodArr.sort();
@@ -182,13 +168,9 @@
 				});
 			},
 			updateCart(index,num){
-				this.$axios.post('CartController/updateCart', this.$qs.stringify({
-					businessId: this.businessId,
-					userId: this.user.userId,
-					foodId: this.foodArr[index].foodId,
-					quantity:this.foodArr[index].quantity+num
-				})).then(response => {
-					if(response.data==1){
+				let url = `http://localhost:10400/CartController/updateCart/${this.user.userId}/${this.businessId}/${this.foodArr[index].foodId}/${this.foodArr[index].quantity+num}`;
+				this.$axios.put().then(response => {
+					if(response.data.result==1){
 						//此食品数量要更新为1或-1：
 						this.foodArr[index].quantity+=num;
 						this.foodArr.sort();
@@ -204,12 +186,9 @@
 				});
 			},
 			removeCart(index){
-				this.$axios.post('CartController/removeCart', this.$qs.stringify({
-					businessId: this.businessId,
-					userId: this.user.userId,
-					foodId: this.foodArr[index].foodId,
-				})).then(response => {
-					if(response.data==1){
+				let url = `http://localhost:10400/CartController/removeCart/${this.user.userId}/${this.businessId}/${this.foodArr[index].foodId}`;
+				this.$axios.delete(url).then(response => {
+					if(response.data.result==1){
 						//此食品数量要更新为0：视图的减号和数字要消失
 						this.foodArr[index].quantity=0;
 						this.foodArr.sort();

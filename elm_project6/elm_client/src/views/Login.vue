@@ -79,11 +79,9 @@
 				}
 				
 				//登录请求
-				this.$axios.post('UserController/getUserByIdByPass', this.$qs.stringify({
-					userId: this.userId,
-					password:this.password
-				})).then(response => {
-					let user = response.data;
+				let url = `http://localhost:10100/UserController/getUserByIdByPass/${this.userId}/${this.password}`;
+				this.$axios.get(url).then(response => {
+					let user = response.data.result;
 					if(user==null){
 						this.$message.error('用户名或密码不正确!');
 					}else{

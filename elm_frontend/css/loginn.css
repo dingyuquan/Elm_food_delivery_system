@@ -1,0 +1,100 @@
+/********************* 总容器 *************************/
+.wrapper{
+	width: 100%;
+	height: 100%;
+	background-color: #f6fff8;
+}
+
+/********************* header *************************/
+.wrapper header{
+	width: 100%;
+	background-color: #f6fff8;
+	color: #191919;
+	font-size: 6vw;
+	padding: 20vw 0vw 5vw 0vw;
+	left: 0;
+	top: 0;
+	z-index: 1000;
+	
+	display: flex;
+	justify-content: left;
+	align-items: center;
+}
+
+.wrapper header p{
+	padding: 0vw 0vw 0vw 8vw;
+}
+
+/********************* 表单 *************************/
+.wrapper .form-box{
+	width: 100%;
+	margin-top: 6vw;
+	background-color: #f6fff8;
+}
+.wrapper .form-box li{
+	box-sizing: border-box;
+	padding: 5vw 3vw 5vw 8vw;
+	
+	display: flex;
+	align-items: center;
+}
+.wrapper .form-box li .title{
+	background-color: #f6fff8;
+	flex: 0 0 18vw;
+	font-size: 3.5vw;
+	font-weight: 700;
+	color: #505050;
+}
+.wrapper .form-box li .content{
+	background-color: #f6fff8;
+	flex: 1;
+}
+.wrapper .form-box li .content input{
+	background-color: #f6fff8;
+	border: none;
+	outline: none;
+	width: 100%;
+	height: 4vw;
+	font-size: 3vw;
+}
+
+.wrapper .button-register{
+	width: 100%;
+	box-sizing: border-box;
+	padding: 12vw 8vw 0 8vw;
+}
+.wrapper .button-register button{
+	width: 100%;
+	height: 10vw;
+	font-size: 3.8vw;
+	font-weight: 700;
+	color: #1e1e1e;
+	background-color: #01e1ec;
+	border-radius: 8px;
+	
+	border: none;
+	outline: none;
+	border: solid 1px #DDD;
+}
+
+.wrapper .reminder{
+	width: 100%;
+	font-size: 3vw;
+	color: #6faab3;
+	box-sizing: border-box;
+	padding: 4vw 8vw 0 8vw;
+}
+.wrapper .icon{
+	width: 100%;
+	box-sizing: border-box;
+	padding: 50vw 8vw 0 30vw;
+}
+
+.wrapper .icon img{
+	background-color: #f6fff8;
+	padding: 0vw 4vw 0 4vw;
+	font-size: 3.8vw;
+	font-weight: 700;
+	border-radius: 20px;
+	
+}

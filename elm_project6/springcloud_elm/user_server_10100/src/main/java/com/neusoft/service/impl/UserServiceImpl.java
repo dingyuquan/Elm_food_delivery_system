@@ -4,11 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.neusoft.mapper.UserMapper;
 import com.neusoft.po.User;
-//import com.neusoft.service.ScoreService;
+import com.neusoft.service.ScoreService;
 import com.neusoft.service.UserService;
-//import com.neusoft.service.VirtualWalletService;
 import com.neusoft.util.CommonUtil;
-//import com.neusoft.vo.ScoreVO;
+import com.neusoft.vo.ScoreVO;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -16,11 +15,8 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserMapper userMapper;
 	
-//	@Autowired
-//	private VirtualWalletService virtualWalletService;
-	
-//	@Autowired
-//	private ScoreService scoreService;
+	@Autowired
+	private ScoreService scoreService;
 
 	@Override
 	public User getUserByIdByPass(User user) {
@@ -36,7 +32,6 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int saveUser(User user) {
 		int res = userMapper.saveUser(user);
-		virtualWalletService.creatWalletByUserId(user.getUserId());
 		ScoreVO scoreVO = new ScoreVO();
 		scoreVO.setChannelId(2);
 		scoreVO.setCreateDate(CommonUtil.getCurrentDate());

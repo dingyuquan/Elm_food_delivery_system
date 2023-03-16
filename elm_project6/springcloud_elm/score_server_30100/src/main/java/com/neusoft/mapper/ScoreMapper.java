@@ -1,0 +1,23 @@
+package com.neusoft.mapper;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+
+import com.neusoft.entity.ScoreEntity;
+import com.neusoft.entity.ScoreStoreEntity;
+
+@Mapper
+public interface ScoreMapper {
+
+	@Insert("insert into score values(null,#{userId},#{channelId},#{eventId},#{credit},#{createDate},#{expireDate})")
+	public int saveScore(ScoreEntity scoreEntity);
+	
+	@Select("select * from score where userId=#{userId} and credit>0 order by createDate desc")
+	public List<ScoreEntity> listGainScoreByUserId(String userId);
+	
+	@Select("select * from score where userId=#{userId} and credit<0 order by createDate desc")
+	public List<ScoreEntity> listUseScoreByUserId(String userId);
+}

@@ -94,26 +94,24 @@
 		},
 		created() {
 			this.user = this.$getSessionStorage('user');
-			this.$axios.post('OrdersController/getOrdersById', this.$qs.stringify({
-				orderId: this.orderId
-			})).then(response => {
-				this.orders = response.data;
+			let url = `http://localhost:10600/OrdersController/getOrdersById/${this.orderId}`;
+			this.$axios.get(url).then(response => {
+				this.orders = response.data.result;
 			}).catch(error => {
 				console.error(error);
 			});
-			this.$axios.post('ScoreController/getCredit', this.$qs.stringify({
-				userId: this.user.userId
-			})).then(response => {
-				console.log(response.data);
-				this.score = response.data;
+			let url1 = `http://localhost:30100/ScoreController/getCredit/${this.user.userId}`;
+			this.$axios.get(url1).then(response => {
+				console.log(response.data.result);
+				this.score = response.data.result;
 			}).catch(error => {
 				console.error(error);
 			});
-			this.$axios.post('OrdersController/showDeductionAmount', this.$qs.stringify({
-				orderId: this.orderId
-			})).then(response => {
-				console.log(response.data);
-				this.resArr = response.data;
+			
+			let amountUrl = `http://localhost:10600/OrdersController/showDeductionAmount/${this.orderId}`;
+			this.$axios.get(amountUrl).then(response => {
+				console.log(response.data.result);
+				this.resArr = response.data.result;
 				this.deductionAmout = Number(this.resArr[1]);
 			}).catch(error => {
 				console.error(error);
@@ -140,11 +138,11 @@
 			},
 			payment(){
 				if(this.flag==0){
-					//不使用积分
-					this.$axios.post('OrdersController/payOrders', this.$qs.stringify({
-						orderId: this.orderId
-					})).then(response => {
-						if(response.data==1){
+					// 不使用积分
+					// 此处与钱包积分相关, 若改过那仨接口则需要修改此处
+					let payUrl1 = `http://localhost:10600/OrdersController/payOrders/${this.orderId}`;
+					this.$axios.put(payUrl1).then(response => {
+						if(response.data.result==1){
 							this.$message({
 								message: "支付成功",
 								type: 'success',
@@ -163,10 +161,10 @@
 					});
 				}else{
 					//使用积分
-					this.$axios.post('OrdersController/payOrdersUsingScore', this.$qs.stringify({
-						orderId: this.orderId
-					})).then(response => {
-						if(response.data==1){
+					// 此处与钱包积分相关, 若改过那仨接口则需要修改此处
+					let payUrl2 = `http://localhost:10600/OrdersController/payOrdersUsingScore/${this.orderId}`;
+					this.$axios.put(payUrl2).then(response => {
+						if(response.data.result==1){
 							this.$message({
 								message: "支付成功",
 								type: 'success',

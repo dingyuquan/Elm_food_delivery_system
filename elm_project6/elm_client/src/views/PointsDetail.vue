@@ -54,19 +54,17 @@
         },
         created(){
             this.user = this.$getSessionStorage('user');
-            this.$axios.post('ScoreController/listGainLog', this.$qs.stringify({
-            	userId: this.user.userId
-            })).then(response => {
-            	console.log(response.data);
-            	this.gainScoreDetailArr = response.data;
+			let url = `http://localhost:30100/ScoreController/listGainLog/${this.user.userId}`;
+            this.$axios.get(url).then(response => {
+            	console.log(response.data.result);
+            	this.gainScoreDetailArr = response.data.result;
             }).catch(error => {
             	console.error(error);
             });
-			this.$axios.post('ScoreController/listUseLog', this.$qs.stringify({
-				userId: this.user.userId
-			})).then(response => {
-				console.log(response.data);
-				this.useScoreDetailArr = response.data;
+			let url1 = `http://localhost:30100/ScoreController/listUseLog/${this.user.userId}`;
+			this.$axios.get(url1).then(response => {
+				console.log(response.data.result);
+				this.useScoreDetailArr = response.data.result;
 			}).catch(error => {
 				console.error(error);
 			});

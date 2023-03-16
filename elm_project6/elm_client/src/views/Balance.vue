@@ -73,10 +73,9 @@
 		},
 		created(){
 			this.user = this.$getSessionStorage('user');
-			this.$axios.post('VirtualWalletController/getBalanceByUserId', this.$qs.stringify({
-				userId: this.user.userId
-			})).then(response => {
-				this.balance = response.data;
+			let url = `http://localhost:40100/VirtualWalletController/getBalanceByUserId/${this.user.userId}`;
+			this.$axios.get(url).then(response => {
+				this.balance = response.data.result;
 			}).catch(error => {
 				console.error(error);
 			});
@@ -89,21 +88,18 @@
                 this.$router.push({path:'/balanceDetail'});
             },
 			recharge(){
-				this.$axios.post('VirtualWalletController/cashinByWalletId', this.$qs.stringify({
-					userId: this.user.userId,
-					amount: this.rechargeInput
-				})).then(response => {
-					let res = response.data;
+				let url1 = `http://localhost:40100/VirtualWalletController/cashinByWalletId/${this.user.userId}/${this.rechargeInput}`;
+				this.$axios.put(url1).then(response => {
+					let res = response.data.result;
 					if(res == 1){
 						this.$message({
 							message: '充值成功！',
 							type: 'success',
 							duration: 1500
 						});
-						this.$axios.post('VirtualWalletController/getBalanceByUserId', this.$qs.stringify({
-							userId: this.user.userId
-						})).then(response => {
-							this.balance = response.data;
+						let url2 = `http://localhost:40100/VirtualWalletController/getBalanceByUserId/${this.user.userId}`;
+						this.$axios.get(url2).then(response => {
+							this.balance = response.data.result;
 						}).catch(error => {
 							console.error(error);
 						});
@@ -122,21 +118,18 @@
 				});
 			},
 			withdraw(){
-				this.$axios.post('VirtualWalletController/cashoutByWalletId', this.$qs.stringify({
-					userId: this.user.userId,
-					amount: this.withdrawInput
-				})).then(response => {
-					let res = response.data;
+				let url3 = `http://localhost:40100/VirtualWalletController/cashoutByWalletId/${this.user.userId}/${this.withdrawInput}`;
+				this.$axios.put(url3).then(response => {
+					let res = response.data.result;
 					if(res == 1){
 						this.$message({
 							message: '提现成功！',
 							type: 'success',
 							duration: 1500
 						});
-						this.$axios.post('VirtualWalletController/getBalanceByUserId', this.$qs.stringify({
-							userId: this.user.userId
-						})).then(response => {
-							this.balance = response.data;
+						let url4 = `http://localhost:40100/VirtualWalletController/getBalanceByUserId/${this.user.userId}`;
+						this.$axios.post(url4).then(response => {
+							this.balance = response.data.result;
 						}).catch(error => {
 							console.error(error);
 						});

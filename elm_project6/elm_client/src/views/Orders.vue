@@ -67,19 +67,16 @@
 			this.deliveryaddress = this.$getLocalStorage(this.user.userId);
 			
 			//查询当前商家
-			this.$axios.post('BusinessController/getBusinessById', this.$qs.stringify({
-				businessId: this.businessId
-			})).then(response => {
-				this.business = response.data;
+			let businessUrl = `http://localhost:10300/BusinessController/getBusinessById/${this.businessId}`;
+			this.$axios.get(businessUrl).then(response => {
+				this.business = response.data.result;
 			}).catch(error => {
 				console.error(error);
 			});
 			//查询当前用户在购物车中的当前商家食品列表
-			this.$axios.post('CartController/listCart', this.$qs.stringify({
-				userId:this.user.userId,
-				businessId: this.businessId
-			})).then(response => {
-				this.cartArr = response.data;
+			let cartUrl = `http://localhost:10400/CartController/listCart/${this.user.userId}/${this.businessId}`;
+			this.$axios.get(cartUrl).then(response => {
+				this.cartArr = response.data.result;
 			}).catch(error => {
 				console.error(error);
 			});
@@ -112,13 +109,9 @@
 					});
 					return;
 				}
-				this.$axios.post('OrdersController/createOrders', this.$qs.stringify({
-					userId:this.user.userId,
-					businessId:this.businessId,
-					daId:this.deliveryaddress.daId,
-					orderTotal:this.totalPrice
-				})).then(response=>{
-					let orderId = response.data;
+				let url = `http://localhost:10600/OrdersController/createOrders/${this.user.userId}/${this.businessId}/${this.deliveryaddress.daId}/${this.totalPrice}`;
+				this.$axios.post(url).then(response=>{
+					let orderId = response.data.result;
 					if(orderId>0){
 						this.$router.push({path:'/payment',query:{orderId:orderId}});
 					}else{

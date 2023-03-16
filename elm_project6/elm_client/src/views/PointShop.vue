@@ -66,11 +66,10 @@
 		},
 		created(){
 			this.user = this.$getSessionStorage('user');
-			this.$axios.post('ScoreController/getCredit', this.$qs.stringify({
-				userId: this.user.userId
-			})).then(response => {
-				console.log(response.data);
-				this.credit = response.data;
+			let url = `http://localhost:30100/ScoreController/getCredit/${this.user.userId}`;
+			this.$axios.get(url).then(response => {
+				console.log(response.data.result);
+				this.credit = response.data.result;
 			}).catch(error => {
 				console.error(error);
 			});
@@ -94,12 +93,9 @@
 								duration: 1000
 							});
 						}else{
-							this.$axios.post('ScoreController/expendCredit', this.$qs.stringify({
-								userId: this.user.userId,
-								credit: score,
-								channelId: 4
-							})).then(response => {
-								let res = response.data;
+							let url1 = `http://localhost:30100/ScoreController/expendCredit/${this.user.userId}/${score}/${4}`;
+							this.$axios.put(url1).then(response => {
+								let res = response.data.result;
 								if(res > 0){
 									this.$message({
 									    type: 'success',
