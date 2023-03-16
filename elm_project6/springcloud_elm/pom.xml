@@ -38,5 +38,7 @@
   
 	<modules>
 		<module>user_server_10100</module>
+		<module>virtualwallet_server_40100</module>
+		<module>score_server_30100</module>
 	</modules>
 </project>
