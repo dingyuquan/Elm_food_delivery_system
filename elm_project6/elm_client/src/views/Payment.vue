@@ -100,7 +100,7 @@
 			}).catch(error => {
 				console.error(error);
 			});
-			let url1 = `http://localhost:30100/ScoreController/getCredit/${this.user.userId}`;
+			let url1 = `http://localhost:10800/ScoreController/getCredit/${this.user.userId}`;
 			this.$axios.get(url1).then(response => {
 				console.log(response.data.result);
 				this.score = response.data.result;

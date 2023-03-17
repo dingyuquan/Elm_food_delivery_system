@@ -54,14 +54,14 @@
         },
         created(){
             this.user = this.$getSessionStorage('user');
-			let url = `http://localhost:30100/ScoreController/listGainLog/${this.user.userId}`;
+			let url = `http://localhost:10800/ScoreController/listGainLog/${this.user.userId}`;
             this.$axios.get(url).then(response => {
             	console.log(response.data.result);
             	this.gainScoreDetailArr = response.data.result;
             }).catch(error => {
             	console.error(error);
             });
-			let url1 = `http://localhost:30100/ScoreController/listUseLog/${this.user.userId}`;
+			let url1 = `http://localhost:10800/ScoreController/listUseLog/${this.user.userId}`;
 			this.$axios.get(url1).then(response => {
 				console.log(response.data.result);
 				this.useScoreDetailArr = response.data.result;

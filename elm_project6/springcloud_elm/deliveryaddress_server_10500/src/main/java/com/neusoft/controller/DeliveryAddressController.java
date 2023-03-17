@@ -49,7 +49,7 @@ public class DeliveryAddressController {
 		param.setContactTel(contactTel);
 		param.setAddress(address);
 		param.setUserId(userId);
-		int result = deliveryAddressService.updateDeliveryAddress(param);
+		int result = deliveryAddressService.saveDeliveryAddress(param);
 		return new CommonResult(200, "success", result);
 	}
 	

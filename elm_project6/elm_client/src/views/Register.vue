@@ -136,7 +136,7 @@
 				//注册请求
 				// 此处与钱包积分相关, 若修改了后端的接口则需要修改此处
 				let url = `http://localhost:10100/UserController/saveUser/${this.user.userId}/${this.user.password}/${this.user.userName}/${this.user.userSex}`;
-				this.$axios.post(url).then(response => {
+				this.$axios.get(url).then(response => {
 					if(response.data.result > 0){
 						this.$message({
 							message: "注册成功！",

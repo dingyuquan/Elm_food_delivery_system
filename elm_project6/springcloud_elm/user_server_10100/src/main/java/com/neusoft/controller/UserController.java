@@ -46,7 +46,7 @@ public class UserController {
 		return new CommonResult(200, "success", result);
 	}
 	
-	@PostMapping("/saveUser/{userId}/{password}/{userName}/{userSex}")
+	@GetMapping("/saveUser/{userId}/{password}/{userName}/{userSex}")
 	public CommonResult<Integer> saveUser(
 			@PathVariable("userId") String userId,
 			@PathVariable("password") String password,
@@ -61,7 +61,7 @@ public class UserController {
 		
 		int result = userService.saveUser(param);
 		
-		CommonResult<Integer> createWalletResult = restTemplate.getForObject("http://localhost:40100/VirtualWalletController/createWalletByUserId/" + userId, CommonResult.class);
+		CommonResult<Integer> createWalletResult = restTemplate.getForObject("http://localhost:10700/VirtualWalletController/createWalletByUserId/" + userId, CommonResult.class);
 		if(createWalletResult.getCode() == 200) {
 			//do nothing
 		}else {

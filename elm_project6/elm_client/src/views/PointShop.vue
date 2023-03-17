@@ -66,7 +66,7 @@
 		},
 		created(){
 			this.user = this.$getSessionStorage('user');
-			let url = `http://localhost:30100/ScoreController/getCredit/${this.user.userId}`;
+			let url = `http://localhost:10800/ScoreController/getCredit/${this.user.userId}`;
 			this.$axios.get(url).then(response => {
 				console.log(response.data.result);
 				this.credit = response.data.result;
@@ -93,7 +93,7 @@
 								duration: 1000
 							});
 						}else{
-							let url1 = `http://localhost:30100/ScoreController/expendCredit/${this.user.userId}/${score}/${4}`;
+							let url1 = `http://localhost:10800/ScoreController/expendCredit/${this.user.userId}/${score}/${4}`;
 							this.$axios.put(url1).then(response => {
 								let res = response.data.result;
 								if(res > 0){

@@ -169,7 +169,7 @@
 			},
 			updateCart(index,num){
 				let url = `http://localhost:10400/CartController/updateCart/${this.user.userId}/${this.businessId}/${this.foodArr[index].foodId}/${this.foodArr[index].quantity+num}`;
-				this.$axios.put().then(response => {
+				this.$axios.put(url).then(response => {
 					if(response.data.result==1){
 						//此食品数量要更新为1或-1：
 						this.foodArr[index].quantity+=num;

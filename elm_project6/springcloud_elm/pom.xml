@@ -38,8 +38,8 @@
   
 	<modules>
 		<module>user_server_10100</module>
-		<module>virtualwallet_server_40100</module>
-		<module>score_server_30100</module>
+		<module>virtualwallet_server_10700</module>
+		<module>score_server_10800</module>
 		
 		<module>food_server_10200</module>
 		<module>business_server_10300</module>

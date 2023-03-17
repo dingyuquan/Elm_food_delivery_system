@@ -61,7 +61,7 @@
         },
         created(){
             this.user = this.$getSessionStorage('user');
-			let url = `http://localhost:40100/VirtualWalletController/getTransactionByUserId/${this.user.userId}`;
+			let url = `http://localhost:10700/VirtualWalletController/getTransactionByUserId/${this.user.userId}`;
             this.$axios.get(url).then(response => {
             	this.detailArr = response.data.result;
             }).catch(error => {

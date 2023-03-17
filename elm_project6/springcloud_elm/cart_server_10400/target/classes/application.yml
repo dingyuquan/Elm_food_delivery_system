@@ -11,8 +11,8 @@ spring:
     name: cart-server
   datasource:
     username: root
-    password: admin
-    url: jdbc:mysql://localhost:3306/elm?characterEncoding=utf-8
+    password: dyq73028
+    url: jdbc:mysql://localhost:3306/elm?characterEncoding=utf-8&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
 
 mybatis:

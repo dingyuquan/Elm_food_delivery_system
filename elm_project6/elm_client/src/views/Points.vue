@@ -46,7 +46,7 @@
 		},
 		created(){
 			this.user = this.$getSessionStorage('user');
-			let url = `http://localhost:30100/ScoreController/getCredit/${this.user.userId}`;
+			let url = `http://localhost:10800/ScoreController/getCredit/${this.user.userId}`;
 			this.$axios.get(url).then(response => {
 				console.log(response.data.result);
 				this.score.credit = response.data.result;

@@ -73,7 +73,7 @@
 		},
 		created(){
 			this.user = this.$getSessionStorage('user');
-			let url = `http://localhost:40100/VirtualWalletController/getBalanceByUserId/${this.user.userId}`;
+			let url = `http://localhost:10700/VirtualWalletController/getBalanceByUserId/${this.user.userId}`;
 			this.$axios.get(url).then(response => {
 				this.balance = response.data.result;
 			}).catch(error => {
@@ -88,7 +88,7 @@
                 this.$router.push({path:'/balanceDetail'});
             },
 			recharge(){
-				let url1 = `http://localhost:40100/VirtualWalletController/cashinByWalletId/${this.user.userId}/${this.rechargeInput}`;
+				let url1 = `http://localhost:10700/VirtualWalletController/cashinByWalletId/${this.user.userId}/${this.rechargeInput}`;
 				this.$axios.put(url1).then(response => {
 					let res = response.data.result;
 					if(res == 1){
@@ -97,7 +97,7 @@
 							type: 'success',
 							duration: 1500
 						});
-						let url2 = `http://localhost:40100/VirtualWalletController/getBalanceByUserId/${this.user.userId}`;
+						let url2 = `http://localhost:10700/VirtualWalletController/getBalanceByUserId/${this.user.userId}`;
 						this.$axios.get(url2).then(response => {
 							this.balance = response.data.result;
 						}).catch(error => {
@@ -118,7 +118,7 @@
 				});
 			},
 			withdraw(){
-				let url3 = `http://localhost:40100/VirtualWalletController/cashoutByWalletId/${this.user.userId}/${this.withdrawInput}`;
+				let url3 = `http://localhost:10700/VirtualWalletController/cashoutByWalletId/${this.user.userId}/${this.withdrawInput}`;
 				this.$axios.put(url3).then(response => {
 					let res = response.data.result;
 					if(res == 1){
@@ -127,8 +127,8 @@
 							type: 'success',
 							duration: 1500
 						});
-						let url4 = `http://localhost:40100/VirtualWalletController/getBalanceByUserId/${this.user.userId}`;
-						this.$axios.post(url4).then(response => {
+						let url4 = `http://localhost:10700/VirtualWalletController/getBalanceByUserId/${this.user.userId}`;
+						this.$axios.get(url4).then(response => {
 							this.balance = response.data.result;
 						}).catch(error => {
 							console.error(error);
