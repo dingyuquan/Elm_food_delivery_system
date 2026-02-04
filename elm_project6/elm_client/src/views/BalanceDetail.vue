@@ -51,7 +51,7 @@
     
 </template>
 
-<script>
+<script setup>
     export default{
         data() {
             return {
@@ -77,7 +77,7 @@
             }
         }
     }
-</script>
+</script setup>
 
 <style scoped>
     /********************* 总容器 *************************/
