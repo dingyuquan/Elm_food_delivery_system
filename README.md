@@ -1,11 +1,11 @@
-# 饿了么
+# Elm_food_delivery_system
 
-#### 介绍
+#### Introduction
 Elm_food_delivery_system
 
 SpringBoot/SpringCloud + Vue + MySQL
 
-#### 说明
+#### Description
 
 elm_backend: Backend version1
 
